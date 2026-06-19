@@ -1,4 +1,4 @@
-﻿# TODO — CASE STUDY: ReadMore Rental Room
+# TODO — CASE STUDY: ReadMore Rental Room
 ## Hướng dẫn thực hành từng tuần — ReactJS (FER202)
 
 **Stack:** React 18 + Vite + React-Bootstrap 2.x + Axios + JSON-Server  
@@ -99,15 +99,15 @@ Thiết lập nền tảng kỹ thuật và tư duy thiết kế trước khi co
 - [ ] Mockup này là **hợp đồng giao diện** cho cả 10 tuần: Tuần 2 code static theo mockup, Tuần 5 đối chiếu lại khi làm responsive
 
 **Dữ liệu [D]**
-- [ ] Tạo `db.json` tại root project, tham khảo `SourceCode/Week01-Setup/db.json`
-- [ ] `books`: ít nhất 8 cuốn, mỗi cuốn có đủ: id, title, author, price, originalPrice, category, categoryId, cover, rating, reviewCount, stock, featured, description
-- [ ] `categories`: 5 danh mục, mỗi danh mục có: id, name, icon, bookCount
-- [ ] Kiểm tra: `npx json-server --watch db.json --port 3001` → mở `http://localhost:3001/books` thấy JSON
+- [x] Tạo `db.json` tại root project, thiết kế mảng rooms và categories khớp với UI
+- [x] `rooms`: ít nhất 8 phòng (thiết kế 11 phòng), mỗi phòng có đủ: id, title, address, price, deposit, category, categoryId, cover, area, rating, reviewCount, available, featured, description
+- [x] `categories`: 5 danh mục, mỗi danh mục có: id, name, icon, roomCount
+- [x] Kiểm tra: `npx json-server --watch db.json --port 3001` → mở `http://localhost:3001/rooms` thấy JSON
 
 **Component Tree & Tài liệu [E]**
 - [ ] Vẽ sơ đồ Component Tree (dùng draw.io, Figma, hoặc ASCII art)
 - [ ] Xác định: component nào là **page**, component nào là **reusable**
-- [ ] Viết `README.md`: tên project, mô tả, cách cài, cách chạy, danh sách tính năng
+- [x] Viết `README.md`: tên project, mô tả, cách cài, cách chạy, danh sách tính năng
 
 **GitHub [A + ALL]**
 - [ ] Tạo repo GitHub, đặt tên: `rental-room`
