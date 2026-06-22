@@ -36,10 +36,10 @@ Thiết lập nền tảng kỹ thuật và tư duy thiết kế trước khi co
 - [ ] Cài React DevTools extension cho Chrome
 
 **Khởi tạo project [A]**
-- [ ] Chạy: `npm create vite@latest rental-room -- --template react`
-- [ ] Vào thư mục: `cd rental-room && npm install`
-- [ ] Cài thêm: `npm install react-bootstrap bootstrap react-router-dom axios`
-- [ ] Tạo cấu trúc thư mục: `src/components` `src/pages` `src/context` `src/hooks` `src/services` `src/assets`
+- [x] Chạy: `npm create vite@latest rental-room -- --template react`
+- [x] Vào thư mục: `cd rental-room && npm install`
+- [x] Cài thêm: `npm install react-bootstrap bootstrap react-router-dom axios`
+- [x] Tạo cấu trúc thư mục: `src/components` `src/pages` `src/context` `src/hooks` `src/services` `src/assets`
 - [ ] Kiểm tra: `npm run dev` → mở `http://localhost:5173` thấy trang Vite mặc định
 
 **Thiết kế mockup với AI Design Tools [B, C]**
