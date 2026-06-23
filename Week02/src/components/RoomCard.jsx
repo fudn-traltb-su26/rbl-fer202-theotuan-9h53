@@ -1,24 +1,15 @@
-import React from 'react';
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
 
-const RoomCard = () => {
-  // Toàn bộ dữ liệu hardcode theo yêu cầu
-  const room = {
-    imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Phòng trọ sinh viên cao cấp, Full nội thất gần ĐH FPT",
-    address: "Khu công nghệ cao Hòa Lạc, Thạch Thất, Hà Nội",
-    area: "25",
-    price: "3,500,000",
-    deposit: "3,500,000",
-    isAvailable: true
-  };
+const RoomCard = ({ room }) => {
+  // Check if room data is provided, otherwise return null or fallback
+  if (!room) return null;
 
   return (
     <Card className="h-100 shadow hover-lift border-0 overflow-hidden" style={{ borderRadius: '16px', transition: 'transform 0.2s ease-in-out' }}>
       <div className="position-relative">
         <Card.Img 
           variant="top" 
-          src={room.imageUrl} 
+          src={`https://picsum.photos/seed/room${room.id}/300/200`} 
           alt="Room image" 
           style={{ height: '240px', objectFit: 'cover' }}
         />
