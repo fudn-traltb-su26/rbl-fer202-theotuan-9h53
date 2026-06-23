@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
+import RoomCard from './components/RoomCard';
 import './App.css';
 
 function App() {
@@ -14,6 +15,20 @@ function App() {
         <Container className="mt-4 mb-5">
           {/* Hero Section */}
           <Banner />
+          {/* Room Card Section */}
+          <h3 className="fw-bold mb-4 mt-5">Phòng trọ nổi bật</h3>
+          <Row className="g-4 mb-5">
+            <Col md={4} sm={6}>
+              <RoomCard />
+            </Col>
+            <Col md={4} sm={6}>
+              <RoomCard />
+            </Col>
+            <Col md={4} sm={6}>
+              <RoomCard />
+            </Col>
+          </Row>
+
           {/* Features Section */}
           <h3 className="text-center fw-bold mb-5 mt-5">Tại sao chọn RentalWise?</h3>
           <Row className="g-4">
