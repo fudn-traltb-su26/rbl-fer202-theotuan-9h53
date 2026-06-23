@@ -7,7 +7,7 @@ const Header = () => {
     <Navbar bg="white" expand="lg" className="shadow-sm sticky-top py-3">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fw-bold fs-3 text-primary d-flex align-items-center gap-2">
-          <span style={{ fontSize: '1.8rem' }}>🏠</span> CozySpace
+          <span style={{ fontSize: '1.8rem' }}>🏠</span> RentalWise
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 shadow-none" />
         <Navbar.Collapse id="basic-navbar-nav">
