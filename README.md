@@ -5,17 +5,22 @@
 Chào mừng bạn đến với dự án **Hệ thống Tìm kiếm và Cho thuê Phòng trọ (Rental Room System)**. Dự án được phát triển trong **10 tuần học** môn **ReactJS (FER202)** bởi nhóm 5 thành viên.
 
 Mã SV | HỌ VÀ TÊN | 
+--- | --- |
+DE190510 | Huỳnh Nguyễn Thị Phương Dung |
+DE190024 | Hoàng Nhật Kha |
+DE190573 | Nguyễn Trọng Nguyên Khôi |
+DE190098 | Bùi Hoàng Long |
+DE200241 | Trần Nguyên Đức |
 
-DE190510 | Huỳnh Nguyễn Thị Phương Dung
+## 📖 Mô tả dự án
+Hệ thống Tìm kiếm và Cho thuê Phòng trọ "RentWise" là một ứng dụng Web (Single Page Application) giúp người dùng tìm kiếm, xem chi tiết và đặt phòng trọ trực tuyến một cách dễ dàng. Giao diện được thiết kế theo phong cách Premium Dark Theme hiện đại, tập trung vào trải nghiệm người dùng (UX/UI) mượt mà và trực quan.
 
-DE190024 | Hoàng Nhật Kha
-
-DE190573 | Nguyễn Trọng Nguyên Khôi 
-
-DE190098 | Bùi Hoàng Long
-
-DE200241 | Trần Nguyên Đức
-
+## ✨ Danh sách tính năng (Features)
+- **Trang chủ (Home Page):** Trình bày banner chính, danh sách các danh mục phòng trọ (Studio, Căn hộ mini, v.v.), và lưới các phòng nổi bật được đánh giá cao.
+- **Tìm kiếm và Lọc phòng (Room List & Search):** Cho phép người dùng tìm phòng bằng từ khóa, lọc theo loại phòng, mức giá, và tiện ích. Hiển thị kết quả dạng lưới với phân trang.
+- **Chi tiết phòng (Room Detail):** Hiển thị đầy đủ thông tin phòng bao gồm thư viện ảnh (gallery), giá thuê, tiền cọc, diện tích, đánh giá, danh sách tiện ích, và nút hành động Đặt phòng.
+- **Giỏ hàng / Đặt phòng (Booking Cart):** Quản lý danh sách các phòng người dùng đã chọn để đặt thuê, cho phép tuỳ chỉnh số tháng thuê, xóa phòng khỏi giỏ, và tính toán tổng số tiền cọc.
+- **Thiết kế Responsive & Dark Theme:** Tối ưu hóa trải nghiệm trên nhiều thiết bị (Mobile/Tablet/Desktop) với giao diện Dark Theme sang trọng.
 
 ## 🛠️ Stack Công nghệ & Môi trường
 
@@ -30,17 +35,15 @@ DE200241 | Trần Nguyên Đức
 ## 📂 Cấu trúc dự án
 
 ```text
-├── Rental_Room/                    # Thư mục chứa mã nguồn ứng dụng React (Vite)
+├── rental-room/                    # Thư mục chứa mã nguồn ứng dụng React (Vite)
 │   ├── docs/                       # Tài liệu thiết kế, handoff, mockup của nhóm
+│   │   ├── component-tree.md       # Sơ đồ Component Tree
+│   │   ├── component-tree.png      # Ảnh Component Tree
 │   │   └── mockup/                 # Mockup 4 màn hình, prompt log và file handoff
 │   ├── public/                     # Tài nguyên tĩnh công cộng (Logo, icons, v.v.)
 │   ├── src/                        # Thư mục code React chính
-│   │   ├── assets/                 # Hình ảnh tĩnh và tài nguyên
 │   │   ├── components/             # Reusable Components (Header, Footer, RoomCard, v.v.)
 │   │   ├── pages/                  # Page Components (HomePage, RoomListPage, v.v.)
-│   │   ├── context/                # Quản lý State toàn cục (CartContext, ThemeContext)
-│   │   ├── hooks/                  # Custom Hooks tự định nghĩa (useFetch, useDebounce, v.v.)
-│   │   ├── services/               # Services gọi API (bookService.js/roomService.js)
 │   │   ├── App.jsx                 # Component chính của ứng dụng
 │   │   └── main.jsx                # Entry point
 │   ├── db.json                     # Bản sao của Mock Database chạy trên cổng 3001
@@ -49,7 +52,6 @@ DE200241 | Trần Nguyên Đức
 │
 ├── db.json                         # Mock Database chính tại root dự án
 ├── TODO.md                         # Checklist các nhiệm vụ cần thực hiện qua từng tuần
-├── Week01/ ... Week10/             # Các thư mục lưu báo cáo nhóm theo từng tuần
 └── README.md                       # Tài liệu hướng dẫn sử dụng dự án (File này)
 ```
 
@@ -62,7 +64,7 @@ Tại thư mục root của dự án, chạy lệnh sau để khởi chạy mock
 ```bash
 npx json-server --watch db.json --port 3001
 ```
-*Hoặc nếu đang ở trong thư mục `Rental_Room`, bạn có thể chạy:*
+*Hoặc nếu đang ở trong thư mục `rental-room`, bạn có thể chạy:*
 ```bash
 npm run server
 ```
@@ -71,9 +73,9 @@ Sau khi chạy, API sẽ hoạt động tại:
 - Danh sách phòng thuê: [http://localhost:3001/rooms](http://localhost:3001/rooms)
 
 ### 2. Khởi chạy Frontend React (Vite)
-Mở một terminal mới, di chuyển vào thư mục `Rental_Room` và cài đặt thư viện:
+Mở một terminal mới, di chuyển vào thư mục `rental-room` và cài đặt thư viện:
 ```bash
-cd Rental_Room
+cd rental-room
 npm install
 npm run dev
 ```
@@ -86,25 +88,22 @@ Trang web sẽ được mở tại: [http://localhost:5173](http://localhost:517
 Mock database bao gồm hai mảng dữ liệu chính được thiết kế đồng bộ với giao diện UI:
 
 ### 1. Mảng `categories` (Loại phòng / Khu vực)
-Bao gồm **5 danh mục chính** chứa các trường: `id`, `name`, `icon` (Bootstrap Icons), và `roomCount` (Số lượng phòng thuộc nhóm đó):
-- **Studio** (`id: 1`): Căn hộ Studio khép kín, tiện lợi.
-- **Căn hộ mini** (`id: 2`): Căn hộ diện tích vừa, có phân chia không gian.
-- **Phòng trọ gác lửng** (`id: 3`): Phòng trọ truyền thống tối ưu diện tích sử dụng.
-- **Căn hộ dịch vụ** (`id: 4`): Căn hộ đầy đủ dịch vụ dọn dẹp, giặt là cao cấp.
-- **Ở ghép / Homestay** (`id: 5`): Ký túc xá giường tầng, phòng ghép chia sẻ chi phí.
+Bao gồm **5 danh mục chính** chứa các trường: `id`, `name`, `icon` (Bootstrap Icons), và `roomCount`:
+- **Studio** (`id: 1`): Căn hộ Studio khép kín.
+- **Căn hộ mini** (`id: 2`): Căn hộ diện tích vừa.
+- **Phòng trọ gác lửng** (`id: 3`): Phòng trọ truyền thống tối ưu diện tích.
+- **Căn hộ dịch vụ** (`id: 4`): Căn hộ đầy đủ dịch vụ dọn dẹp.
+- **Ở ghép / Homestay** (`id: 5`): Ký túc xá, phòng ghép.
 
 ### 2. Mảng `rooms` (Phòng thuê)
-Bao gồm **11 phòng thuê** chi tiết (tối thiểu là 8), đảm bảo khớp toàn bộ các trường thông tin hiển thị trên UI:
+Bao gồm dữ liệu các phòng thuê chi tiết:
 - `id`: Định danh phòng duy nhất.
-- `title`: Tiêu đề hiển thị ngắn gọn, thu hút.
-- `address`: Địa chỉ chi tiết phòng trọ.
-- `price`: Giá thuê một tháng (VND).
-- `deposit`: Tiền đặt cọc phòng (VND).
-- `category` & `categoryId`: Tên và ID danh mục tương ứng.
-- `cover`: Link ảnh đại diện chất lượng cao (Unsplash).
+- `title`, `address`: Tiêu đề và địa chỉ.
+- `price`, `deposit`: Giá thuê và tiền đặt cọc (VND).
+- `categoryId`: ID danh mục tương ứng.
+- `cover`: Link ảnh đại diện (Unsplash).
 - `area`: Diện tích phòng (m²).
-- `rating` & `reviewCount`: Điểm đánh giá (sao) và số lượng bình luận.
-- `available`: Trạng thái phòng còn trống hay đã thuê (`true`/`false`).
-- `featured`: Đánh dấu phòng nổi bật hiển thị ở trang chủ (`true`/`false`).
-- `description`: Mô tả chi tiết các tiện ích đi kèm (AC, tủ lạnh, bếp, máy giặt, an ninh...).
-
+- `rating`, `reviewCount`: Điểm đánh giá và số lượng bình luận.
+- `available`: Trạng thái phòng trống (`true`/`false`).
+- `featured`: Đánh dấu nổi bật ở trang chủ (`true`/`false`).
+- `description`: Mô tả chi tiết tiện ích.

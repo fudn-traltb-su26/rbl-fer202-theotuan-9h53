@@ -1,0 +1,70 @@
+graph TD
+    classDef container fill:#2d3748,stroke:#4fd1c5,stroke-width:2px,color:#fff,rx:5px,ry:5px;
+    classDef reusable fill:#4a5568,stroke:#fc8181,stroke-width:2px,color:#fff,rx:5px,ry:5px;
+    classDef app fill:#1a202c,stroke:#ecc94b,stroke-width:3px,color:#fff,rx:10px,ry:10px;
+
+    App["App (Root)"]:::app
+    
+    %% Pages
+    HomePage["HomePage (Page)"]:::container
+    RoomListPage["RoomListPage (Page)"]:::container
+    RoomDetailPage["RoomDetailPage (Page)"]:::container
+    BookingCartPage["BookingCartPage (Page)"]:::container
+
+    App --> HomePage
+    App --> RoomListPage
+    App --> RoomDetailPage
+    App --> BookingCartPage
+
+    %% Reusable Components
+    Header["Header (Reusable)"]:::reusable
+    Footer["Footer (Reusable)"]:::reusable
+    RoomGrid["RoomGrid (Reusable)"]:::reusable
+    RoomCard["RoomCard (Reusable)"]:::reusable
+    CategoryCard["CategoryCard (Reusable)"]:::reusable
+
+    %% HomePage specific
+    HeroBanner["HeroBanner"]:::container
+    CategoryList["CategoryList"]:::container
+
+    HomePage --> Header
+    HomePage --> HeroBanner
+    HomePage --> CategoryList
+    CategoryList --> CategoryCard
+    HomePage --> RoomGrid
+    HomePage --> Footer
+
+    %% RoomListPage specific
+    FilterBar["FilterBar"]:::container
+    Pagination["Pagination (Reusable)"]:::reusable
+
+    RoomListPage --> Header
+    RoomListPage --> FilterBar
+    RoomListPage --> RoomGrid
+    RoomGrid --> RoomCard
+    RoomListPage --> Pagination
+    RoomListPage --> Footer
+
+    %% RoomDetailPage specific
+    RoomGallery["RoomGallery"]:::container
+    RoomInfo["RoomInfo"]:::container
+    Amenities["Amenities"]:::container
+    BookingActions["BookingActions"]:::container
+
+    RoomDetailPage --> Header
+    RoomDetailPage --> RoomGallery
+    RoomDetailPage --> RoomInfo
+    RoomDetailPage --> Amenities
+    RoomDetailPage --> BookingActions
+    RoomDetailPage --> Footer
+
+    %% BookingCartPage specific
+    CartTable["CartTable"]:::container
+    CartItem["CartItem (Reusable)"]:::reusable
+    CartSummary["CartSummary"]:::container
+
+    BookingCartPage --> Header
+    BookingCartPage --> CartTable
+    CartTable --> CartItem
+    BookingCartPage --> CartSummary
+    BookingCartPage --> Footer
