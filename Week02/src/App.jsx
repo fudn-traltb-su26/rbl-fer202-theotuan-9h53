@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
 import RoomGrid from './components/RoomGrid';
+import CategoryList from './components/CategoryList';
 import './App.css';
 
 function App() {
@@ -14,6 +15,10 @@ function App() {
         <Container className="mt-4 mb-5">
           {/* Hero Section */}
           <Banner />
+          
+          {/* Category Section */}
+          <CategoryList />
+
           {/* Room Card Section */}
           <h3 className="fw-bold mb-4 mt-5">Phòng trọ nổi bật</h3>
           <RoomGrid />
