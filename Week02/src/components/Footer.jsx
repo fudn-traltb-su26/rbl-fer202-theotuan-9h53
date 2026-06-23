@@ -9,7 +9,7 @@ const Footer = () => {
         <Row className="gy-4">
           <Col lg={4} md={6} className="pe-lg-5">
             <h4 className="fw-bold mb-3 text-white d-flex align-items-center gap-2">
-              <span>🏠</span> CozySpace
+              <span>🏠</span> RentalWise
             </h4>
             <p className="text-light" style={{ lineHeight: '1.6' }}>
               Nền tảng số 1 về tìm kiếm và đặt phòng trọ. Chúng tôi mang đến giải pháp kết nối nhanh chóng, an toàn và tiện lợi nhất giữa người thuê và chủ nhà.
@@ -55,7 +55,7 @@ const Footer = () => {
               </li>
               <li className="d-flex align-items-center gap-2">
                 <span className="fs-5">✉️</span>
-                <span>support@cozyspace.com</span>
+                <span>support@rentalwise.com</span>
               </li>
             </ul>
           </Col>
@@ -64,7 +64,7 @@ const Footer = () => {
         <hr className="my-4" style={{ borderColor: '#374151' }} />
         
         <div className="text-center text-light small">
-          <p className="mb-0">&copy; {new Date().getFullYear()} CozySpace. All rights reserved. Designed for FER202.</p>
+          <p className="mb-0">&copy; {new Date().getFullYear()} RentalWise. All rights reserved. Designed for FER202.</p>
         </div>
       </Container>
     </footer>
