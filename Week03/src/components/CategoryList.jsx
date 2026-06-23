@@ -1,37 +1,14 @@
 import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 
-
-const CategoryList = ({ categories }) => {
+const CategoryList = ({ categories = [] }) => {
   return (
     <div className="mt-5 mb-4">
-      <h3 className="fw-bold mb-4">Danh mục nổi bật</h3>
-
       {/* Sử dụng toán tử điều kiện bậc ba (Ternary operator) */}
       {categories.length > 0 ? (
         <Row className="g-4">
           {/* Áp dụng toán tử && (Short-circuit evaluation): Chỉ tiến hành hiển thị danh sách nếu categories.length > 0 */}
           {categories.length > 0 && categories.map((category) => (
-
-const CATEGORIES = [
-  { id: 1, name: 'Căn hộ dịch vụ', icon: '🏢' },
-  { id: 2, name: 'Phòng trọ gác lửng', icon: '🪜' },
-  { id: 3, name: 'Studio', icon: '🎨' },
-  { id: 4, name: 'Ở ghép', icon: '🤝' },
-  { id: 5, name: 'Nhà nguyên căn', icon: '🏡' }
-];
-
-const CategoryList = () => {
-  return (
-    <div className="mt-5 mb-4">
-      <h3 className="fw-bold mb-4">Danh mục nổi bật</h3>
-      
-      {/* Sử dụng toán tử điều kiện bậc ba (Ternary operator) */}
-      {CATEGORIES.length > 0 ? (
-        <Row className="g-4">
-          {/* Áp dụng toán tử && (Short-circuit evaluation): Chỉ tiến hành hiển thị danh sách nếu CATEGORIES.length > 0 */}
-          {CATEGORIES.length > 0 && CATEGORIES.map((category) => (
-
             <Col key={category.id} xs={6} md={4} lg={2} className="flex-fill">
               <Card className="text-center h-100 shadow-sm border-1 hover-lift" style={{ cursor: 'pointer', borderRadius: '15px' }}>
                 <Card.Body className="d-flex flex-column justify-content-center align-items-center p-3">
