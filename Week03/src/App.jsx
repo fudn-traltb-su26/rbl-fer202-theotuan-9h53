@@ -2,11 +2,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
-import RoomGrid from './components/RoomGrid';
+import RoomGrid, { ROOMS_DATA } from './components/RoomGrid';
 import CategoryList from './components/CategoryList';
 import './App.css';
 
 function App() {
+  const handleReserve = (room) => {
+    alert(`Bạn vừa nhấn đặt phòng: ${room.title}`);
+  };
+
   return (
     <div className="d-flex flex-column min-vh-100">
       <Header />
@@ -21,7 +25,7 @@ function App() {
 
           {/* Room Card Section */}
           <h3 className="fw-bold mb-4 mt-5">Phòng trọ nổi bật</h3>
-          <RoomGrid />
+          <RoomGrid rooms={ROOMS_DATA} onReserve={handleReserve} />
 
           {/* Features Section */}
           <h3 className="text-center fw-bold mb-5 mt-5">Tại sao chọn RentalWise?</h3>
