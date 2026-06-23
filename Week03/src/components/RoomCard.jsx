@@ -1,6 +1,6 @@
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
 
-const RoomCard = ({ room }) => {
+const RoomCard = ({ room, onReserve }) => {
   // Check if room data is provided, otherwise return null or fallback
   if (!room) return null;
 
@@ -16,6 +16,11 @@ const RoomCard = ({ room }) => {
         {room.isAvailable && (
           <Badge bg="success" className="position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm">
             Còn trống
+          </Badge>
+        )}
+        {room.originalPrice > room.price && (
+          <Badge bg="danger" className="position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill shadow-sm">
+            -{Math.round(((room.originalPrice - room.price) / room.originalPrice) * 100)}%
           </Badge>
         )}
       </div>
@@ -39,7 +44,7 @@ const RoomCard = ({ room }) => {
           <Col xs={8}>
             <div className="p-2 bg-light rounded-3 h-100 d-flex flex-column justify-content-center">
               <div className="text-muted mb-1" style={{ fontSize: '0.8rem' }}>Giá thuê/Tháng</div>
-              <div className="fw-bold text-primary fs-5">{room.price} VNĐ</div>
+              <div className="fw-bold text-primary fs-5">{room.price.toLocaleString('vi-VN')}đ/tháng</div>
             </div>
           </Col>
         </Row>
@@ -53,7 +58,12 @@ const RoomCard = ({ room }) => {
           <Button variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2">
             Xem chi tiết
           </Button>
-          <Button variant="primary" className="flex-grow-1 rounded-pill fw-medium py-2 shadow-sm">
+          <Button 
+            variant="primary" 
+            className="flex-grow-1 rounded-pill fw-medium py-2 shadow-sm"
+            onClick={() => onReserve(room)}
+            disabled={!room.isAvailable}
+          >
             Đặt giữ chỗ
           </Button>
         </div>
