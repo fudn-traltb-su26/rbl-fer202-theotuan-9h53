@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header />
+      <Header bookingCount={2} savedCount={5} />
       
       <main className="flex-grow-1">
         <Container className="mt-4 mb-5">
@@ -95,7 +95,7 @@ function App() {
               onSelectCategory={setActiveCategory}
             />
 
-            <CategoryList categories={CATEGORIES} />
+            
 
           </SectionWrapper>
 

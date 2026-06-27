@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
-const Header = () => {
+const Header = ({ bookingCount = 0, savedCount = 0 }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, logout } = useAuth();
 
@@ -24,10 +24,15 @@ const Header = () => {
               <Nav.Link as={Link} to="/contact" className="px-3 hover-lift text-dark">Liên hệ</Nav.Link>
             </Nav>
             <div className="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+              <Button variant="light" as={Link} to="/bookings" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
+                <span className="text-warning">📌</span> 
+                <span>Đặt chỗ</span>
+                {bookingCount > 0 && <Badge bg="warning" text="dark" pill className="ms-1">{bookingCount}</Badge>}
+              </Button>
               <Button variant="light" as={Link} to="/saved" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
                 <span className="text-danger">❤️</span> 
                 <span>Đã lưu</span>
-                <Badge bg="danger" pill className="ms-1">0</Badge>
+                {savedCount > 0 && <Badge bg="danger" pill className="ms-1">{savedCount}</Badge>}
               </Button>
               
               {user ? (
