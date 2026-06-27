@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
-const Header = ({ totalItems = 0 }) => {
+const Header = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, logout } = useAuth();
 
@@ -27,7 +27,7 @@ const Header = ({ totalItems = 0 }) => {
               <Button variant="light" as={Link} to="/saved" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
                 <span className="text-danger">❤️</span> 
                 <span>Đã lưu</span>
-                <Badge bg="danger" pill className="ms-1">{totalItems}</Badge>
+                <Badge bg="danger" pill className="ms-1">0</Badge>
               </Button>
               
               {user ? (

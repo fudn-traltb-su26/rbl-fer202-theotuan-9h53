@@ -60,24 +60,10 @@ const ALL_ROOMS = [
 function App() {
   // State lưu từ khóa tìm kiếm — lifting state up từ SearchBar lên App
   const [keyword, setKeyword] = useState('');
-  
-  // Khởi tạo state quản lý danh sách đặt phòng
-  const [booking, setBooking] = useState([]);
 
-  // Hàm xử lý thêm phòng vào danh sách (Immutable)
-  const handleAddToBooking = (room) => {
-    const existing = booking.find(i => i.id === room.id);
-    if (existing) {
-      // Tăng số tháng thuê dự kiến nếu đã tồn tại
-      setBooking(prev => prev.map(i => i.id === room.id ? { ...i, quantity: i.quantity + 1 } : i));
-    } else {
-      // Thêm phòng mới với số tháng mặc định là 1
-      setBooking(prev => [...prev, { ...room, quantity: 1 }]);
-    }
+  const handleReserve = (room) => {
+    console.log("Bạn vừa nhấn đặt phòng:", room);
   };
-
-  // Tính toán tổng số lượng phòng/tháng đã chọn
-  const totalItems = booking.reduce((sum, i) => sum + i.quantity, 0);
 
   // Derived state: lọc phòng theo keyword (không lưu riêng, tính trực tiếp từ state)
   const filteredRooms = ALL_ROOMS.filter(room =>
@@ -86,7 +72,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header totalItems={totalItems} />
+      <Header />
       
       <main className="flex-grow-1">
         <Container className="mt-4 mb-5">
@@ -110,7 +96,7 @@ function App() {
               </p>
             )}
 
-            <RoomGrid rooms={filteredRooms} onReserve={handleAddToBooking} />
+            <RoomGrid rooms={filteredRooms} onReserve={handleReserve} />
           </SectionWrapper>
 
           {/* Features Section */}
