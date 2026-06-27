@@ -60,12 +60,13 @@ const ALL_ROOMS = [
 function App() {
   // State lưu từ khóa tìm kiếm — lifting state up từ SearchBar lên App
   const [keyword, setKeyword] = useState('');
-  
+
   // State lựa chọn danh mục phòng
   const [activeCategory, setActiveCategory] = useState(null);
 
   // Thêm dòng log này để user test dễ dàng qua Console
   console.log("Danh mục đang chọn hiện tại (activeCategory):", activeCategory);
+
 
   const handleReserve = (room) => {
     console.log("Bạn vừa nhấn đặt phòng:", room);
@@ -87,11 +88,15 @@ function App() {
           
           {/* Category Section */}
           <SectionWrapper title="Loại hình phòng cho thuê" backgroundColor="#f8f9fa">
+
             <CategoryList 
               categories={CATEGORIES} 
               activeCategory={activeCategory}
               onSelectCategory={setActiveCategory}
             />
+
+            <CategoryList categories={CATEGORIES} />
+
           </SectionWrapper>
 
           {/* Room Card Section with SearchBar */}
