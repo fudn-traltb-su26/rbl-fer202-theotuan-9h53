@@ -20,6 +20,7 @@ const CATEGORIES = [
 const ALL_ROOMS = [
   {
     id: 1,
+    categoryId: 1,
     title: "Phòng trọ sinh viên cao cấp, Full nội thất gần ĐH FPT",
     address: "Khu công nghệ cao Hòa Lạc, Thạch Thất, Hà Nội",
     area: "25",
@@ -30,6 +31,7 @@ const ALL_ROOMS = [
   },
   {
     id: 2,
+    categoryId: 3,
     title: "Căn hộ Studio Vinhomes Grand Park, Đầy đủ tiện ích",
     address: "Phân khu Rainbow, Vinhomes Grand Park, Quận 9, TP. HCM",
     area: "30",
@@ -39,6 +41,7 @@ const ALL_ROOMS = [
   },
   {
     id: 3,
+    categoryId: 1,
     title: "Chung cư mini khép kín sạch sẽ gần ĐH GTVT",
     address: "Đường 385, Phường Tăng Nhơn Phú A, Quận 9, TP. Thủ Đức",
     area: "28",
@@ -48,6 +51,7 @@ const ALL_ROOMS = [
   },
   {
     id: 4,
+    categoryId: 2,
     title: "Phòng trọ gác lửng giá rẻ cho sinh viên gần ĐH SPKT",
     address: "Đường Hoàng Diệu 2, Phường Linh Trung, TP. Thủ Đức",
     area: "20",
@@ -63,23 +67,28 @@ function App() {
 
   // State lựa chọn danh mục phòng
   const [activeCategory, setActiveCategory] = useState(null);
+  
+  // State lưu số lượng đặt chỗ
+  const [bookingCount, setBookingCount] = useState(0);
 
   // Thêm dòng log này để user test dễ dàng qua Console
   console.log("Danh mục đang chọn hiện tại (activeCategory):", activeCategory);
 
-
-  const handleReserve = (room) => {
+  const handleAddToBooking = (room) => {
     console.log("Bạn vừa nhấn đặt phòng:", room);
+    setBookingCount(prev => prev + 1);
   };
 
-  // Derived state: lọc phòng theo keyword (không lưu riêng, tính trực tiếp từ state)
-  const filteredRooms = ALL_ROOMS.filter(room =>
-    !keyword || room.title.toLowerCase().includes(keyword.toLowerCase())
-  );
+  // Derived state: lọc phòng theo keyword và category
+  const filteredRooms = ALL_ROOMS.filter(room => {
+    const matchKw = !keyword || room.title.toLowerCase().includes(keyword.toLowerCase());
+    const matchCat = activeCategory === null || room.categoryId === activeCategory;
+    return matchKw && matchCat;
+  });
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header bookingCount={2} savedCount={5} />
+      <Header bookingCount={bookingCount} savedCount={5} />
       
       <main className="flex-grow-1">
         <Container className="mt-4 mb-5">
@@ -111,7 +120,7 @@ function App() {
               </p>
             )}
 
-            <RoomGrid rooms={filteredRooms} onReserve={handleReserve} />
+            <RoomGrid rooms={filteredRooms} onReserve={handleAddToBooking} />
           </SectionWrapper>
 
           {/* Features Section */}
