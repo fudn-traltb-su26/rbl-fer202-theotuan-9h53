@@ -8,13 +8,13 @@ const CategoryList = ({ categories = [], activeCategory, onSelectCategory }) => 
     <div className="mt-5 mb-4">
       {/* Sử dụng toán tử điều kiện bậc ba (Ternary operator) */}
       {categories.length > 0 ? (
-        <Row className="g-4">
+        <Row xs={2} sm={3} md={5} className="g-3">
           {/* Áp dụng toán tử && (Short-circuit evaluation): Chỉ tiến hành hiển thị danh sách nếu categories.length > 0 */}
           {categories.length > 0 && categories.map((category) => (
-            <Col key={category.id} xs={6} md={4} lg={2} className="flex-fill">
+            <Col key={category.id}>
               <Card 
-                className={`text-center h-100 shadow-sm hover-lift ${activeCategory === category.id ? 'border-primary bg-primary bg-opacity-10' : 'border-1'}`} 
-                style={{ cursor: 'pointer', borderRadius: '15px' }}
+                className={`text-center h-100 shadow-sm border-0 hover-lift ${activeCategory === category.id ? 'bg-primary bg-opacity-10' : ''}`} 
+                role="button"
                 onClick={() => onSelectCategory(activeCategory === category.id ? null : category.id)}
               >
                 <Card.Body className="d-flex flex-column justify-content-center align-items-center p-3">
