@@ -1,7 +1,7 @@
 import { Navbar, Nav, Container, Badge, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ bookingCount = 0 }) => {
   return (
     <Navbar bg="white" expand="lg" className="shadow-sm sticky-top py-3">
       <Container>
@@ -17,6 +17,11 @@ const Header = () => {
             <Nav.Link as={Link} to="/contact" className="px-3 hover-lift text-dark">Liên hệ</Nav.Link>
           </Nav>
           <div className="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+            <Button variant="light" as={Link} to="/bookings" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
+              <span className="text-warning">📌</span> 
+              <span>Đặt chỗ</span>
+              {bookingCount > 0 && <Badge bg="warning" text="dark" pill className="ms-1">{bookingCount}</Badge>}
+            </Button>
             <Button variant="light" as={Link} to="/saved" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
               <span className="text-danger">❤️</span> 
               <span>Đã lưu</span>
