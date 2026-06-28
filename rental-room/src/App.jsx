@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import RoomGrid from './components/RoomGrid';
-import './App.css';
+import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 function App() {
   const [bookingCount, setBookingCount] = useState(3); // Mock cart items
@@ -21,30 +22,34 @@ function App() {
   return (
     <>
       {/* Header Area */}
-      <header className="main-header">
-        <div className="header-container">
-          <div className="logo-container">
-            <span className="logo-accent">AI</span>
-            <span className="logo-text">RentWise</span>
-          </div>
+      <Navbar bg="dark" variant="dark" expand="md">
+        <Container>
+          <Navbar.Brand href="#home" className="d-flex align-items-center gap-2">
+            <span className="bg-danger text-white px-2 py-1 rounded small fw-bold">AI</span>
+            <span className="text-white fw-bold fs-5">RentWise</span>
+          </Navbar.Brand>
 
-          <nav className="nav-menu">
-            <a href="#home" className="nav-link active">Trang chủ</a>
-            <a href="#rooms" className="nav-link">Phòng cho thuê</a>
-            <a href="#about" className="nav-link">Về chúng tôi</a>
-            <a href="#contact" className="nav-link">Liên hệ</a>
-          </nav>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          <div className="header-actions">
-            <button className="cart-btn" aria-label="Booking Cart">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 21h6M5 3h14l-1.5 11h-11L5 3zM9 14v4M15 14v4" />
-              </svg>
-              {bookingCount > 0 && <span className="cart-badge">{bookingCount}</span>}
-            </button>
-          </div>
-        </div>
-      </header>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={NavLink} to="/">Trang chủ</Nav.Link>
+              <Nav.Link as={NavLink} to="/rooms">Phòng cho thuê</Nav.Link>
+              <Nav.Link as={NavLink} to="/about">Về chúng tôi</Nav.Link>
+              <Nav.Link as={NavLink} to="/contact">Liên hệ</Nav.Link>
+            </Nav>
+
+            <Nav>
+              <Nav.Link href="#cart" className="position-relative d-flex align-items-center">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21h6M5 3h14l-1.5 11h-11L5 3zM9 14v4M15 14v4" />
+                </svg>
+                {bookingCount > 0 && <Badge bg="danger" pill className="position-absolute translate-middle" style={{ top: '5px', right: '-15px' }}>{bookingCount}</Badge>}
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
       {/* Hero Banner Section */}
       <section className="hero-banner">
