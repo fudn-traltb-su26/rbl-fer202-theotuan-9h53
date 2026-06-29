@@ -1,72 +1,118 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
+import { Table, Button, Image, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const BookingPage = () => {
+const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
+  // Hàm định dạng tiền tệ
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('vi-VN').format(price) + ' đ';
+  };
+
+  // Tính tổng tiền
+  const totalPrice = bookingItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
+
   return (
-    <Container className="py-5">
-      <h2 className="mb-4 fw-bold">Chi tiết đặt phòng</h2>
-      <Row>
-        {/* Cột 8: Danh sách các phòng đã chọn lưu */}
-        <Col md={8} className="mb-4">
-          <Card className="shadow-sm">
-            <Card.Header className="bg-white py-3">
-              <h5 className="mb-0 fw-bold">Danh sách phòng đã lưu</h5>
-            </Card.Header>
-            <ListGroup variant="flush">
-              <ListGroup.Item className="d-flex justify-content-between align-items-center p-4">
-                <div className="d-flex gap-3">
-                  <div style={{ width: '80px', height: '80px', backgroundColor: '#e9ecef', borderRadius: '8px' }} className="flex-shrink-0"></div>
-                  <div>
-                    <h6 className="fw-bold mb-1">Phòng trọ sinh viên cao cấp</h6>
-                    <p className="text-muted mb-0 small">Khu công nghệ cao Hòa Lạc</p>
-                    <p className="text-primary fw-bold mb-0 mt-1">3,500,000 đ/tháng</p>
-                  </div>
-                </div>
-                <Button variant="outline-danger" size="sm">Xóa</Button>
-              </ListGroup.Item>
-              <ListGroup.Item className="d-flex justify-content-between align-items-center p-4">
-                <div className="d-flex gap-3">
-                  <div style={{ width: '80px', height: '80px', backgroundColor: '#e9ecef', borderRadius: '8px' }} className="flex-shrink-0"></div>
-                  <div>
-                    <h6 className="fw-bold mb-1">Căn hộ Studio Vinhomes Grand Park</h6>
-                    <p className="text-muted mb-0 small">Phân khu Rainbow, Quận 9</p>
-                    <p className="text-primary fw-bold mb-0 mt-1">4,500,000 đ/tháng</p>
-                  </div>
-                </div>
-                <Button variant="outline-danger" size="sm">Xóa</Button>
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
-        </Col>
-
-        {/* Cột 4: Khối thông tin tổng tiền cọc kèm nút thanh toán */}
-        <Col md={4}>
-          <Card className="shadow-sm">
-            <Card.Body className="p-4">
-              <h5 className="fw-bold mb-4">Tổng quan đặt phòng</h5>
-              <div className="d-flex justify-content-between mb-3">
-                <span className="text-muted">Tổng số phòng:</span>
-                <span className="fw-bold">2</span>
+    <Container className="py-5" style={{ minHeight: '60vh' }}>
+      <h2 className="mb-4 fw-bold text-primary">Giỏ hàng / Danh sách đặt phòng</h2>
+      
+      {bookingItems.length === 0 ? (
+        <div className="text-center p-5 bg-light rounded shadow-sm border mt-4">
+          <h4 className="text-muted fw-normal mb-3">Danh sách đặt phòng của bạn đang trống 📌</h4>
+          <p className="text-secondary mb-4">Bạn chưa chọn phòng nào. Hãy quay lại trang danh sách phòng để tìm kiếm.</p>
+          <Link to="/rooms" className="btn btn-primary px-4 py-2 fw-bold">
+            Quay lại danh sách phòng
+          </Link>
+        </div>
+      ) : (
+        <div className="shadow-sm rounded bg-white p-3 border mt-4">
+          <Table responsive bordered hover className="align-middle mb-0">
+            <thead className="table-light">
+              <tr>
+                <th className="text-center">Ảnh thực tế phòng</th>
+                <th>Tên bài đăng</th>
+                <th>Khu vực</th>
+                <th className="text-end">Giá thuê/tháng</th>
+                <th className="text-center" style={{ minWidth: '150px' }}>Số tháng dự kiến thuê</th>
+                <th className="text-end">Thành tiền tạm tính</th>
+                <th className="text-center">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookingItems.map((item) => (
+                <tr key={item.id}>
+                  <td className="text-center" style={{ width: '120px' }}>
+                    <Image 
+                      src={`https://picsum.photos/seed/room${item.id}/300/200`} 
+                      alt={item.title} 
+                      thumbnail 
+                      style={{ width: '100px', height: '70px', objectFit: 'cover' }}
+                    />
+                  </td>
+                  <td>
+                    <Link to={`/rooms/${item.id}`} className="text-decoration-none fw-bold text-dark">
+                      {item.title}
+                    </Link>
+                  </td>
+                  <td className="text-secondary small">{item.address}</td>
+                  <td className="text-end text-danger fw-bold">{formatPrice(item.price)}</td>
+                  <td>
+                    <div className="d-flex justify-content-center align-items-center gap-2">
+                      <Button 
+                        variant="outline-secondary" 
+                        size="sm"
+                        className="rounded-circle d-flex align-items-center justify-content-center"
+                        style={{ width: '28px', height: '28px', padding: 0 }}
+                        onClick={() => onUpdateMonths(item.id, item.quantity - 1)}
+                        disabled={item.quantity <= 1}
+                      >
+                        -
+                      </Button>
+                      <span className="fw-bold px-2">{item.quantity}</span>
+                      <Button 
+                        variant="outline-secondary" 
+                        size="sm"
+                        className="rounded-circle d-flex align-items-center justify-content-center"
+                        style={{ width: '28px', height: '28px', padding: 0 }}
+                        onClick={() => onUpdateMonths(item.id, item.quantity + 1)}
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </td>
+                  <td className="text-end text-danger fw-bold">
+                    {formatPrice(item.price * item.quantity)}
+                  </td>
+                  <td className="text-center">
+                    <Button 
+                      variant="danger" 
+                      size="sm" 
+                      onClick={() => onRemove(item.id)}
+                    >
+                      Xóa
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          
+          <div className="d-flex justify-content-end mt-4 pt-3 border-top">
+            <div className="p-4 bg-light rounded border" style={{ minWidth: '350px' }}>
+              <div className="d-flex justify-content-between mb-2">
+                <span className="text-secondary">Tổng số phòng:</span>
+                <span className="fw-bold">{bookingItems.length} phòng</span>
               </div>
-              <div className="d-flex justify-content-between mb-4">
-                <span className="text-muted">Tạm tính tiền cọc:</span>
-                <span className="fw-bold">8,500,000 đ</span>
+              <div className="d-flex justify-content-between mb-4 align-items-center">
+                <span className="fs-5 fw-bold">Tổng tiền tạm tính:</span>
+                <span className="fs-4 text-danger fw-bold">{formatPrice(totalPrice)}</span>
               </div>
-              <hr />
-              <div className="d-flex justify-content-between mb-4 mt-3">
-                <span className="fw-bold fs-5">Tổng cộng:</span>
-                <span className="fw-bold fs-5 text-danger">8,500,000 đ</span>
-              </div>
-              <Button variant="primary" className="w-100 fw-bold py-3">
-                Tiến hành thanh toán
+              <Button variant="primary" className="w-100 py-2 fw-bold" size="lg">
+                Thanh toán
               </Button>
-              <Button variant="outline-secondary" className="w-100 fw-bold py-2 mt-2">
-                Gửi yêu cầu tư vấn
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+            </div>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };

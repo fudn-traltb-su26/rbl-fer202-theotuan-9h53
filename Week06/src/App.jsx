@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import RoomListPage from './pages/RoomListPage';
 import RoomDetailPage from './pages/RoomDetailPage';
-import CartPage from './pages/CartPage';
+import BookingPage from './pages/BookingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import RoomManagePage from './pages/admin/RoomManagePage';
@@ -71,14 +71,41 @@ function App() {
   const [activeCategory, setActiveCategory] = useState(null);
   
   // State lưu số lượng đặt chỗ
-  const [bookingCount, setBookingCount] = useState(0);
+  const [bookingItems, setBookingItems] = useState([
+    {
+      id: 1,
+      categoryId: 1,
+      title: "Phòng trọ sinh viên cao cấp, Full nội thất gần ĐH FPT",
+      address: "Khu công nghệ cao Hòa Lạc, Thạch Thất, Hà Nội",
+      price: 3500000,
+      quantity: 1
+    }
+  ]);
+  
+  const bookingCount = bookingItems.reduce((sum, item) => sum + item.quantity, 0);
 
   // Thêm dòng log này để user test dễ dàng qua Console
   console.log("Danh mục đang chọn hiện tại (activeCategory):", activeCategory);
 
   const handleAddToBooking = (room) => {
     console.log("Bạn vừa nhấn đặt phòng:", room);
-    setBookingCount(prev => prev + 1);
+    if (room) {
+      setBookingItems(prev => {
+        const exists = prev.find(item => item.id === room.id);
+        if (exists) {
+          return prev.map(item => item.id === room.id ? { ...item, quantity: item.quantity + 1 } : item);
+        }
+        return [...prev, { ...room, quantity: 1 }];
+      });
+    }
+  };
+
+  const onUpdateMonths = (id, newQuantity) => {
+    setBookingItems(prev => prev.map(item => item.id === id ? { ...item, quantity: newQuantity } : item));
+  };
+
+  const onRemove = (id) => {
+    setBookingItems(prev => prev.filter(item => item.id !== id));
   };
 
   // Derived state: lọc phòng theo keyword và category
@@ -117,7 +144,7 @@ function App() {
             />
           } />
           <Route path="/rooms/:id" element={<RoomDetailPage rooms={ALL_ROOMS} />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/booking" element={<BookingPage bookingItems={bookingItems} onUpdateMonths={onUpdateMonths} onRemove={onRemove} />} />
           <Route path="/admin/rooms" element={
             <ProtectedRoute>
               <RoomManagePage />
