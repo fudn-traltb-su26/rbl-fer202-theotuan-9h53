@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  // Mock authentication logic
-  const isAllowed = true; 
+  // Giả định biến isAdmin để kiểm tra quyền
+  const isAdmin = false; 
 
-  if (!isAllowed) {
+  if (!isAdmin) {
     return <Navigate to="/" replace />;
   }
 
