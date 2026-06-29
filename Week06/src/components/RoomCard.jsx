@@ -1,4 +1,5 @@
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const CATEGORY_MAP = {
   1: 'Căn hộ dịch vụ',
@@ -80,7 +81,7 @@ const RoomCard = ({ room, onReserve }) => {
 
         {/* Buttons */}
         <div className="d-flex gap-2 mt-auto">
-          <Button variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm">
+          <Button as={Link} to={`/rooms/${room.id}`} variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm text-decoration-none">
             Xem chi tiết
           </Button>
           <Button
