@@ -2,14 +2,62 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
-import RoomGrid, { ROOMS_DATA } from './components/RoomGrid';
+import RoomGrid from './components/RoomGrid';
 import CategoryList from './components/CategoryList';
 import SectionWrapper from './components/SectionWrapper';
 import './App.css';
 
+const CATEGORIES = [
+  { id: 1, name: 'Căn hộ dịch vụ', icon: '🏢' },
+  { id: 2, name: 'Phòng trọ gác lửng', icon: '🪜' },
+  { id: 3, name: 'Studio', icon: '🎨' },
+  { id: 4, name: 'Ở ghép', icon: '🤝' },
+  { id: 5, name: 'Nhà nguyên căn', icon: '🏡' }
+];
+
+const ROOMS = [
+  {
+    id: 1,
+    title: "Phòng trọ sinh viên cao cấp, Full nội thất gần ĐH FPT",
+    address: "Khu công nghệ cao Hòa Lạc, Thạch Thất, Hà Nội",
+    area: "25",
+    price: 3500000,
+    originalPrice: 4000000,
+    deposit: "3,500,000",
+    isAvailable: true
+  },
+  {
+    id: 2,
+    title: "Căn hộ Studio Vinhomes Grand Park, Đầy đủ tiện ích",
+    address: "Phân khu Rainbow, Vinhomes Grand Park, Quận 9, TP. HCM",
+    area: "30",
+    price: "4,500,000",
+    deposit: "5,000,000",
+    isAvailable: true
+  },
+  {
+    id: 3,
+    title: "Chung cư mini khép kín sạch sẽ gần ĐH GTVT",
+    address: "Đường 385, Phường Tăng Nhơn Phú A, Quận 9, TP. Thủ Đức",
+    area: "28",
+    price: "4,200,000",
+    deposit: "4,200,000",
+    isAvailable: true
+  },
+  {
+    id: 4,
+    title: "Phòng trọ gác lửng giá rẻ cho sinh viên gần ĐH SPKT",
+    address: "Đường Hoàng Diệu 2, Phường Linh Trung, TP. Thủ Đức",
+    area: "20",
+    price: "2,800,000",
+    deposit: "3,000,000",
+    isAvailable: false
+  }
+];
+
 function App() {
   const handleReserve = (room) => {
-    alert(`Bạn vừa nhấn đặt phòng: ${room.title}`);
+    console.log("Bạn vừa nhấn đặt phòng:", room);
   };
 
   return (
@@ -22,21 +70,13 @@ function App() {
           <Banner />
           
           {/* Category Section */}
-          <SectionWrapper 
-            title="Danh mục nổi bật" 
-            subtitle="Khám phá phòng trọ theo các loại hình phổ biến nhất"
-            backgroundColor="#f8f9fa"
-          >
-            <CategoryList />
+          <SectionWrapper title="Loại hình phòng cho thuê" backgroundColor="#f8f9fa">
+            <CategoryList categories={CATEGORIES} />
           </SectionWrapper>
 
           {/* Room Card Section */}
-          <SectionWrapper 
-            title="Phòng trọ nổi bật" 
-            subtitle="Danh sách các phòng cho thuê chất lượng cao có giá tốt nhất vừa mới cập nhật"
-            backgroundColor="#ffffff"
-          >
-            <RoomGrid rooms={ROOMS_DATA} onReserve={handleReserve} />
+          <SectionWrapper title="Phòng thuê nổi bật" subtitle="Cập nhật mới nhất hôm nay">
+            <RoomGrid rooms={ROOMS} onReserve={handleReserve} />
           </SectionWrapper>
 
           {/* Features Section */}

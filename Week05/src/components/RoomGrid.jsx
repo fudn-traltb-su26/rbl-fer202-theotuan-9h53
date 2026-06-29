@@ -11,10 +11,11 @@ const RoomGrid = ({ rooms = [], onReserve }) => {
   }
 
   return (
-    <Row className="g-4 mb-5 row-cols-2 row-cols-md-3 row-cols-xl-5">
+    // xs={2}: 2 cột mobile, sm={3}: 3 cột tablet nhỏ, md={4}: 4 cột tablet, lg={5}: 5 cột desktop
+    <Row xs={2} sm={3} md={4} lg={5} className="g-3 mb-5">
       {rooms.map((room) => (
-        // key={room.id} is applied to the outermost element returned by the map function
-        <Col key={room.id}>
+        // h-100 trên Col đảm bảo tất cả card có chiều cao đồng đều trong cùng một hàng
+        <Col key={room.id} className="h-100">
           <RoomCard room={room} onReserve={onReserve} />
         </Col>
       ))}

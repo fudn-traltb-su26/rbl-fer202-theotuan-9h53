@@ -10,49 +10,66 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
 
   return (
     <>
+      {/* Navbar: expand="lg" → collapse thành hamburger dưới breakpoint lg */}
       <Navbar bg="white" expand="lg" className="shadow-sm sticky-top py-3">
         <Container>
+          {/* Brand logo */}
           <Navbar.Brand as={Link} to="/" className="fw-bold fs-3 text-primary d-flex align-items-center gap-2">
-            <span style={{ fontSize: '1.8rem' }}>🏠</span> RentalWise
+            <span className="navbar-brand-icon">🏠</span> RentalWise
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 shadow-none" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mx-auto fw-medium fs-6 gap-3">
-              <Nav.Link as={Link} to="/" className="px-3 hover-lift text-dark">Trang chủ</Nav.Link>
-              <Nav.Link as={Link} to="/rooms" className="px-3 hover-lift text-dark">Phòng thuê</Nav.Link>
-              <Nav.Link as={Link} to="/categories" className="px-3 hover-lift text-dark">Danh mục</Nav.Link>
-              <Nav.Link as={Link} to="/contact" className="px-3 hover-lift text-dark">Liên hệ</Nav.Link>
+
+          {/* Hamburger toggle: tự động hiện ở mobile nhờ expand="lg" */}
+          <Navbar.Toggle aria-controls="main-navbar-nav" className="border-0 shadow-none" />
+
+          <Navbar.Collapse id="main-navbar-nav">
+            {/* Nav links ở giữa */}
+            <Nav className="mx-auto fw-medium fs-6 gap-2">
+              <Nav.Link as={Link} to="/" className="px-3 text-dark nav-link-custom">Trang chủ</Nav.Link>
+              <Nav.Link as={Link} to="/rooms" className="px-3 text-dark nav-link-custom">Phòng thuê</Nav.Link>
+              <Nav.Link as={Link} to="/categories" className="px-3 text-dark nav-link-custom">Danh mục</Nav.Link>
+              <Nav.Link as={Link} to="/contact" className="px-3 text-dark nav-link-custom">Liên hệ</Nav.Link>
             </Nav>
-            <div className="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-              <Button variant="light" as={Link} to="/bookings" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
-                <span className="text-warning">📌</span> 
+
+            {/* Action buttons bên phải */}
+            <div className="d-flex align-items-center gap-2 mt-3 mt-lg-0 flex-wrap">
+              <Button
+                variant="light"
+                as={Link}
+                to="/bookings"
+                className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift"
+              >
+                <span className="text-warning">📌</span>
                 <span>Đặt chỗ</span>
                 {bookingCount > 0 && <Badge bg="warning" text="dark" pill className="ms-1">{bookingCount}</Badge>}
               </Button>
-              <Button variant="light" as={Link} to="/saved" className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift">
-                <span className="text-danger">❤️</span> 
+
+              <Button
+                variant="light"
+                as={Link}
+                to="/saved"
+                className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift"
+              >
+                <span className="text-danger">❤️</span>
                 <span>Đã lưu</span>
                 {savedCount > 0 && <Badge bg="danger" pill className="ms-1">{savedCount}</Badge>}
               </Button>
-              
+
               {user ? (
                 <Dropdown align="end">
-                  <Dropdown.Toggle 
-                    variant="light" 
+                  <Dropdown.Toggle
+                    variant="light"
                     id="dropdown-user"
-                    className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-1 hover-lift"
-                    style={{ background: '#fff' }}
+                    className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-1 hover-lift bg-white"
                   >
-                    <img 
-                      src={user.picture} 
-                      alt="avatar" 
-                      className="rounded-circle"
-                      style={{ width: '28px', height: '28px' }}
+                    <img
+                      src={user.picture}
+                      alt="avatar"
+                      className="rounded-circle user-avatar"
                       referrerPolicy="no-referrer"
                     />
                     <span className="fw-medium">{user.name}</span>
                   </Dropdown.Toggle>
-                  <Dropdown.Menu className="shadow border-0 mt-2" style={{ borderRadius: '12px' }}>
+                  <Dropdown.Menu className="shadow border-0 mt-2 dropdown-menu-custom">
                     <Dropdown.Item className="py-2">👤 Tài khoản của tôi</Dropdown.Item>
                     <Dropdown.Item className="py-2">🏠 Phòng đã thuê</Dropdown.Item>
                     <Dropdown.Divider />
@@ -62,11 +79,10 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <Button 
-                  variant="primary" 
+                <Button
+                  variant="primary"
                   onClick={() => setShowAuthModal(true)}
-                  className="rounded-pill px-4 py-2 fw-medium hover-lift" 
-                  style={{ backgroundColor: '#4F46E5', borderColor: '#4F46E5' }}
+                  className="rounded-pill px-4 py-2 fw-medium hover-lift btn-login"
                 >
                   Đăng nhập
                 </Button>
@@ -76,9 +92,9 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
         </Container>
       </Navbar>
 
-      <AuthModal 
-        show={showAuthModal} 
-        handleClose={() => setShowAuthModal(false)} 
+      <AuthModal
+        show={showAuthModal}
+        handleClose={() => setShowAuthModal(false)}
       />
     </>
   );
