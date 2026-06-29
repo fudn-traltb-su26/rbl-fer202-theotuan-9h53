@@ -11,7 +11,6 @@
 > - `[ALL]` = Cả nhóm cùng làm  
 > - `[REVIEW]` = Một thành viên khác review lại trước khi merge
 
----
 
 ## TUẦN 1 — KHỞI TẠO PROJECT & THIẾT KẾ GIAO DIỆN
 
