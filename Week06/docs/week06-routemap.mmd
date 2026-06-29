@@ -1,0 +1,22 @@
+graph TD
+    A[App Router] --> B{Public Routes}
+    A --> C{Private Routes}
+    A --> D{Error Route}
+
+    B --> B1["/ (HomePage)"]
+    B --> B2["/rooms (RoomListPage)"]
+    B --> B3["/rooms/:id (RoomDetailPage)"]
+    B --> B4["/booking (BookingPage)"]
+
+    C --> C1["/admin/rooms (RoomManagePage)"]
+    C1 -.->|"Protected by"| P[ProtectedRoute]
+
+    D --> D1["* (NotFoundPage)"]
+
+    classDef public fill:#d4edda,stroke:#28a745,stroke-width:2px;
+    classDef private fill:#f8d7da,stroke:#dc3545,stroke-width:2px;
+    classDef error fill:#fff3cd,stroke:#ffc107,stroke-width:2px;
+    
+    class B,B1,B2,B3,B4 public;
+    class C,C1 private;
+    class D,D1 error;
