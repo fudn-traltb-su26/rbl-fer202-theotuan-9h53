@@ -1,3 +1,10 @@
+/* =========================================
+   App.css — Week05 RentalWise
+   Tất cả custom styles dùng class names
+   thay vì inline style={{}} trong JSX
+   ========================================= */
+
+/* --- Hero Section (legacy, không dùng nữa) --- */
 .hero-section {
   background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
   border-radius: 1rem;
@@ -20,6 +27,7 @@
   pointer-events: none;
 }
 
+/* --- Feature Cards (Tại sao chọn RentalWise) --- */
 .feature-card {
   background: white;
   border-radius: 1rem;
@@ -41,4 +49,149 @@
   justify-content: center;
   font-size: 1.5rem;
   margin: 0 auto 1.25rem;
+}
+
+/* --- Banner Hero --- */
+/* Thay thế style={{}} inline trong Banner.jsx */
+.banner-hero {
+  background:
+    linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.6)),
+    url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')
+    center / cover no-repeat;
+  min-height: 500px;
+}
+
+/* --- Room Card --- */
+/* Thay style={{}} inline trong RoomCard.jsx */
+.room-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.room-card-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Card title không tràn dòng, dùng 1 dòng */
+.room-card-title {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* --- Header --- */
+/* Thay style={{}} inline trong Header.jsx */
+.header-logo-icon {
+  font-size: 1.8rem;
+}
+
+.header-avatar {
+  width: 28px;
+  height: 28px;
+}
+
+.dropdown-menu-rounded {
+  border-radius: 12px;
+}
+
+/* --- Footer --- */
+/* Thay style={{}} inline trong Footer.jsx */
+.footer-bg {
+  background-color: #111827;
+  color: #e5e7eb;
+}
+
+.footer-text {
+  line-height: 1.6;
+}
+
+.footer-divider {
+  border-color: #374151;
+  opacity: 1;
+}
+
+/* --- Brand Button (primary color) --- */
+/* Thay style={{ backgroundColor, borderColor }} inline */
+.btn-brand,
+.btn-brand:hover,
+.btn-brand:focus,
+.btn-brand:active {
+  background-color: #4F46E5 !important;
+  border-color: #4F46E5 !important;
+  color: #fff !important;
+}
+
+.btn-brand:hover {
+  background-color: #4338CA !important;
+  border-color: #4338CA !important;
+}
+
+/* --- Search Bar --- */
+/* Thay toàn bộ style={{}} inline trong SearchBar.jsx */
+.search-input-group {
+  border-radius: 50px;
+  overflow: hidden;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input-group.search-focused {
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2), 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  font-size: 0.95rem;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+/* Xóa focus ring mặc định của Bootstrap */
+.search-input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.search-icon-text {
+  transition: color 0.3s ease;
+  font-size: 1.1rem;
+  padding-left: 18px;
+}
+
+.search-clear-btn {
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 1rem;
+  padding-right: 4px;
+  transition: color 0.2s ease;
+}
+
+.search-clear-btn:hover {
+  color: #ef4444;
+}
+
+.search-submit-btn {
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  border-radius: 0 50px 50px 0 !important;
+  padding: 0 28px;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s ease;
+}
+
+.search-submit-btn:hover {
+  opacity: 0.9;
+}
+
+.search-error {
+  color: #ef4444;
+  font-size: 0.83rem;
+  padding-left: 12px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

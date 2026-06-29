@@ -5,13 +5,15 @@ const RoomCard = ({ room, onReserve }) => {
   if (!room) return null;
 
   return (
-    <Card className="h-100 shadow hover-lift border-0 overflow-hidden" style={{ borderRadius: '16px', transition: 'transform 0.2s ease-in-out' }}>
+    // h-100 đảm bảo Card chiếm toàn bộ chiều cao của Col chứa nó (Col cũng có h-100)
+    // → các card trong cùng một hàng sẽ có chiều cao bằng nhau
+    <Card className="h-100 shadow hover-lift border-0 overflow-hidden rounded-4 room-card">
       <div className="position-relative">
         <Card.Img 
           variant="top" 
           src={`https://picsum.photos/seed/room${room.id}/300/200`} 
           alt="Room image" 
-          style={{ height: '240px', objectFit: 'cover' }}
+          className="room-card-img"
         />
         {room.isAvailable && (
           <Badge bg="success" className="position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm">
@@ -25,31 +27,31 @@ const RoomCard = ({ room, onReserve }) => {
         )}
       </div>
       
-      <Card.Body className="d-flex flex-column p-4">
-        <Card.Title className="fw-bold mb-2 text-truncate" title={room.title} style={{ fontSize: '1.25rem', lineHeight: '1.4' }}>
+      <Card.Body className="d-flex flex-column p-3">
+        <Card.Title className="fw-bold mb-2 text-truncate room-card-title" title={room.title}>
           {room.title}
         </Card.Title>
-        <Card.Text className="text-muted small mb-4">
+        <Card.Text className="text-muted small mb-3">
           <i className="bi bi-geo-alt-fill text-danger me-1"></i>
           {room.address}
         </Card.Text>
         
-        <Row className="g-3 mb-4 text-center mt-auto">
+        <Row className="g-2 mb-3 text-center mt-auto">
           <Col xs={4}>
             <div className="p-2 bg-light rounded-3 h-100 d-flex flex-column justify-content-center">
-              <div className="text-muted mb-1" style={{ fontSize: '0.8rem' }}>Diện tích</div>
+              <div className="text-muted mb-1 small">Diện tích</div>
               <div className="fw-bold">{room.area} m²</div>
             </div>
           </Col>
           <Col xs={8}>
             <div className="p-2 bg-light rounded-3 h-100 d-flex flex-column justify-content-center">
-              <div className="text-muted mb-1" style={{ fontSize: '0.8rem' }}>Giá thuê/Tháng</div>
-              <div className="fw-bold text-primary fs-5">{room.price.toLocaleString('vi-VN')}đ/tháng</div>
+              <div className="text-muted mb-1 small">Giá thuê/Tháng</div>
+              <div className="fw-bold text-primary">{room.price.toLocaleString('vi-VN')}đ/tháng</div>
             </div>
           </Col>
         </Row>
 
-        <div className="d-flex justify-content-between align-items-center mb-4 px-1">
+        <div className="d-flex justify-content-between align-items-center mb-3 px-1">
           <span className="text-muted small">Tiền đặt cọc:</span>
           <span className="fw-semibold text-dark">{room.deposit} VNĐ</span>
         </div>

@@ -54,7 +54,7 @@ const AuthModal = ({ show, handleClose }) => {
 
         <div className="d-flex align-items-center mb-4">
           <hr className="flex-grow-1" />
-          <span className="px-3 text-muted" style={{ fontSize: '0.85rem' }}>HOẶC</span>
+          <span className="px-3 text-muted small">HOẶC</span>
           <hr className="flex-grow-1" />
         </div>
 
@@ -72,9 +72,8 @@ const AuthModal = ({ show, handleClose }) => {
 
           <Button 
             variant="primary" 
-            className="w-100 py-2 fw-medium rounded-pill" 
+            className="w-100 py-2 fw-medium rounded-pill btn-brand" 
             disabled 
-            style={{ backgroundColor: '#4F46E5', borderColor: '#4F46E5' }}
           >
             Đăng nhập bằng Email
           </Button>

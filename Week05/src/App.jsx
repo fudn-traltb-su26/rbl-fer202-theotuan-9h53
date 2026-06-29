@@ -115,7 +115,7 @@ function App() {
 
             {/* Hiển thị kết quả tìm kiếm */}
             {keyword && (
-              <p className="text-muted mb-3" style={{ fontSize: '0.9rem' }}>
+              <p className="text-muted mb-3 small">
                 🔍 Kết quả tìm kiếm cho: <strong>"{keyword}"</strong> — {filteredRooms.length} phòng tìm thấy
               </p>
             )}

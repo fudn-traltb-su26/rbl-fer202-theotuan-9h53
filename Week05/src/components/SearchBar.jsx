@@ -32,28 +32,10 @@ const SearchBar = ({ onSearch }) => {
   return (
     <div className="search-bar-wrapper mb-4">
       <Form onSubmit={handleSubmit}>
-        <InputGroup
-          style={{
-            borderRadius: '50px',
-            overflow: 'hidden',
-            boxShadow: isFocused
-              ? '0 0 0 3px rgba(79, 70, 229, 0.2), 0 4px 20px rgba(0,0,0,0.1)'
-              : '0 4px 20px rgba(0,0,0,0.08)',
-            transition: 'box-shadow 0.3s ease',
-            border: isFocused ? '2px solid #4F46E5' : '2px solid #e5e7eb',
-          }}
-        >
+        {/* InputGroup sử dụng Bootstrap classes thay vì inline style */}
+        <InputGroup className={`search-input-group ${isFocused ? 'search-focused' : ''}`}>
           {/* Search Icon */}
-          <InputGroup.Text
-            style={{
-              background: '#fff',
-              border: 'none',
-              paddingLeft: '18px',
-              color: isFocused ? '#4F46E5' : '#9ca3af',
-              transition: 'color 0.3s ease',
-              fontSize: '1.1rem',
-            }}
-          >
+          <InputGroup.Text className={`search-icon-text bg-white border-0 ps-3 ${isFocused ? 'text-primary' : 'text-secondary'}`}>
             🔍
           </InputGroup.Text>
 
@@ -65,32 +47,14 @@ const SearchBar = ({ onSearch }) => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder="Tìm kiếm phòng theo tên, địa chỉ..."
-            style={{
-              border: 'none',
-              outline: 'none',
-              boxShadow: 'none',
-              fontSize: '0.95rem',
-              padding: '14px 8px',
-              background: '#fff',
-              color: '#111827',
-            }}
+            className="border-0 shadow-none bg-white text-dark search-input py-3"
           />
 
           {/* Clear Button */}
           {keyword !== '' && (
             <InputGroup.Text
               onClick={handleClear}
-              style={{
-                background: '#fff',
-                border: 'none',
-                cursor: 'pointer',
-                color: '#9ca3af',
-                fontSize: '1rem',
-                paddingRight: '4px',
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#9ca3af')}
+              className="search-clear-btn bg-white border-0 pe-1"
               title="Xóa"
             >
               ✕
@@ -100,18 +64,7 @@ const SearchBar = ({ onSearch }) => {
           {/* Search Button */}
           <Button
             type="submit"
-            style={{
-              background: 'linear-gradient(135deg, #4F46E5, #7C3AED)',
-              border: 'none',
-              borderRadius: '0 50px 50px 0',
-              padding: '0 28px',
-              fontWeight: '600',
-              fontSize: '0.9rem',
-              letterSpacing: '0.3px',
-              transition: 'opacity 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+            className="search-submit-btn border-0 fw-semibold px-4"
           >
             Tìm kiếm
           </Button>
@@ -119,15 +72,7 @@ const SearchBar = ({ onSearch }) => {
 
         {/* Error Message */}
         {error && (
-          <div
-            className="d-flex align-items-center gap-2 mt-2"
-            style={{
-              color: '#ef4444',
-              fontSize: '0.83rem',
-              paddingLeft: '12px',
-              animation: 'fadeIn 0.2s ease',
-            }}
-          >
+          <div className="d-flex align-items-center gap-2 mt-2 text-danger search-error">
             <span>⚠️</span>
             <span>{error}</span>
           </div>

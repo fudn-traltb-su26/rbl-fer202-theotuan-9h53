@@ -11,10 +11,11 @@ const RoomGrid = ({ rooms = [], onReserve }) => {
   }
 
   return (
-    <Row className="g-4 mb-5">
+    <Row xs={2} sm={3} md={4} lg={5} className="g-3 mb-5">
       {rooms.map((room) => (
-        // key={room.id} is applied to the outermost element returned by the map function
-        <Col key={room.id} md={4} sm={6}>
+        // key={room.id} là prop đặc biệt của React, giúp nhận diện phần tử trong danh sách
+        // Col có class h-100 để đảm bảo chiều cao đồng đều giữa các card
+        <Col key={room.id} className="h-100">
           <RoomCard room={room} onReserve={onReserve} />
         </Col>
       ))}

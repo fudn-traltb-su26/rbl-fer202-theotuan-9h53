@@ -10,13 +10,19 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
 
   return (
     <>
+      {/* Navbar.Toggle tự động tạo hamburger menu ở màn hình nhỏ (< lg) */}
+      {/* expand="lg" → collapse dưới breakpoint lg (< 992px) */}
       <Navbar bg="white" expand="lg" className="shadow-sm sticky-top py-3">
         <Container>
           <Navbar.Brand as={Link} to="/" className="fw-bold fs-3 text-primary d-flex align-items-center gap-2">
-            <span style={{ fontSize: '1.8rem' }}>🏠</span> RentalWise
+            <span className="header-logo-icon">🏠</span> RentalWise
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0 shadow-none" />
-          <Navbar.Collapse id="basic-navbar-nav">
+
+          {/* Hamburger button — hiển thị khi màn hình < lg */}
+          <Navbar.Toggle aria-controls="main-navbar-nav" className="border-0 shadow-none" />
+
+          {/* Collapse — ẩn trên mobile, expand trên desktop */}
+          <Navbar.Collapse id="main-navbar-nav">
             <Nav className="mx-auto fw-medium fs-6 gap-3">
               <Nav.Link as={Link} to="/" className="px-3 hover-lift text-dark">Trang chủ</Nav.Link>
               <Nav.Link as={Link} to="/rooms" className="px-3 hover-lift text-dark">Phòng thuê</Nav.Link>
@@ -41,18 +47,16 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
                     variant="light" 
                     id="dropdown-user"
                     className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-1 hover-lift"
-                    style={{ background: '#fff' }}
                   >
                     <img 
                       src={user.picture} 
                       alt="avatar" 
-                      className="rounded-circle"
-                      style={{ width: '28px', height: '28px' }}
+                      className="rounded-circle header-avatar"
                       referrerPolicy="no-referrer"
                     />
                     <span className="fw-medium">{user.name}</span>
                   </Dropdown.Toggle>
-                  <Dropdown.Menu className="shadow border-0 mt-2" style={{ borderRadius: '12px' }}>
+                  <Dropdown.Menu className="shadow border-0 mt-2 dropdown-menu-rounded">
                     <Dropdown.Item className="py-2">👤 Tài khoản của tôi</Dropdown.Item>
                     <Dropdown.Item className="py-2">🏠 Phòng đã thuê</Dropdown.Item>
                     <Dropdown.Divider />
@@ -65,8 +69,7 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
                 <Button 
                   variant="primary" 
                   onClick={() => setShowAuthModal(true)}
-                  className="rounded-pill px-4 py-2 fw-medium hover-lift" 
-                  style={{ backgroundColor: '#4F46E5', borderColor: '#4F46E5' }}
+                  className="rounded-pill px-4 py-2 fw-medium hover-lift btn-brand" 
                 >
                   Đăng nhập
                 </Button>
