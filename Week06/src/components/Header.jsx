@@ -35,7 +35,7 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
               <Button
                 variant="light"
                 as={Link}
-                to="/bookings"
+                to="/booking"
                 className="d-flex align-items-center gap-2 border-0 shadow-sm rounded-pill px-3 py-2 fw-medium hover-lift"
               >
                 <span className="text-warning">📌</span>
