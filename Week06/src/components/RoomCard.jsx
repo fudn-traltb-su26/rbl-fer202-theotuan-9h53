@@ -1,4 +1,5 @@
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const CATEGORY_MAP = {
   1: 'Căn hộ dịch vụ',
@@ -12,23 +13,14 @@ const RoomCard = ({ room, onReserve }) => {
   if (!room) return null;
 
   return (
-
-    <Card className="h-100 shadow hover-lift border-0 overflow-hidden" style={{ borderRadius: '16px', transition: 'transform 0.2s ease-in-out' }}>
-      <div className="position-relative">
-
     <Card className="h-100 room-card border-0 overflow-hidden">
       {/* Ảnh phòng */}
       <div className="position-relative room-card-img-wrapper">
-
         <Card.Img
           variant="top"
           src={`https://picsum.photos/seed/room${room.id}/300/200`}
           alt="Room image"
-
-          style={{ height: '240px', objectFit: 'cover' }}
-
           className="room-card-img"
-
         />
         {/* Badge "Còn trống" góc phải */}
         {room.isAvailable && (
@@ -43,18 +35,6 @@ const RoomCard = ({ room, onReserve }) => {
           </Badge>
         )}
       </div>
-
-
-      <Card.Body className="d-flex flex-column p-4">
-        <Card.Title className="fw-bold mb-2 text-truncate" title={room.title} style={{ fontSize: '1.25rem', lineHeight: '1.4' }}>
-          {room.title}
-        </Card.Title>
-        <Card.Text className="text-muted small mb-4">
-          <i className="bi bi-geo-alt-fill text-danger me-1"></i>
-          {room.address}
-        </Card.Text>
-
-        <Row className="g-3 mb-4 text-center mt-auto">
 
       <Card.Body className="d-flex flex-column p-3">
         {/* Badge danh mục */}
@@ -76,7 +56,6 @@ const RoomCard = ({ room, onReserve }) => {
 
         {/* Diện tích + Giá thuê */}
         <Row className="g-2 mb-3 text-center">
-
           <Col xs={4}>
             <div className="p-2 bg-light rounded-3 h-100 d-flex flex-column justify-content-center">
               <div className="room-stat-label">Diện tích</div>
@@ -102,16 +81,12 @@ const RoomCard = ({ room, onReserve }) => {
 
         {/* Buttons */}
         <div className="d-flex gap-2 mt-auto">
-          <Button variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm">
+          <Button as={Link} to={`/rooms/${room.id}`} variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm text-decoration-none">
             Xem chi tiết
           </Button>
           <Button
             variant="primary"
-
-            className="flex-grow-1 rounded-pill fw-medium py-2 shadow-sm"
-
             className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm shadow-sm"
-
             onClick={() => onReserve(room)}
             disabled={!room.isAvailable}
           >

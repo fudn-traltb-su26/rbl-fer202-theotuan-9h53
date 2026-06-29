@@ -1,5 +1,5 @@
 import { Navbar, Nav, Container, Badge, Button, Dropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
@@ -24,10 +24,10 @@ const Header = ({ bookingCount = 0, savedCount = 0 }) => {
           <Navbar.Collapse id="main-navbar-nav">
             {/* Nav links ở giữa */}
             <Nav className="mx-auto fw-medium fs-6 gap-2">
-              <Nav.Link as={Link} to="/" className="px-3 text-dark nav-link-custom">Trang chủ</Nav.Link>
-              <Nav.Link as={Link} to="/rooms" className="px-3 text-dark nav-link-custom">Phòng thuê</Nav.Link>
-              <Nav.Link as={Link} to="/categories" className="px-3 text-dark nav-link-custom">Danh mục</Nav.Link>
-              <Nav.Link as={Link} to="/contact" className="px-3 text-dark nav-link-custom">Liên hệ</Nav.Link>
+              <Nav.Link as={NavLink} to="/" end className="px-3 text-dark nav-link-custom">Trang chủ</Nav.Link>
+              <Nav.Link as={NavLink} to="/rooms" className="px-3 text-dark nav-link-custom">Phòng thuê</Nav.Link>
+              <Nav.Link as={NavLink} to="/categories" className="px-3 text-dark nav-link-custom">Danh mục</Nav.Link>
+              <Nav.Link as={NavLink} to="/contact" className="px-3 text-dark nav-link-custom">Liên hệ</Nav.Link>
             </Nav>
 
             {/* Action buttons bên phải */}
