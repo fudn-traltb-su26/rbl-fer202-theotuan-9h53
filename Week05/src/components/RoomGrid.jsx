@@ -11,10 +11,10 @@ const RoomGrid = ({ rooms = [], onReserve }) => {
   }
 
   return (
-    <Row className="g-4 mb-5">
+    <Row className="g-4 mb-5 row-cols-2 row-cols-md-3 row-cols-xl-5">
       {rooms.map((room) => (
         // key={room.id} is applied to the outermost element returned by the map function
-        <Col key={room.id} md={4} sm={6}>
+        <Col key={room.id}>
           <RoomCard room={room} onReserve={onReserve} />
         </Col>
       ))}
