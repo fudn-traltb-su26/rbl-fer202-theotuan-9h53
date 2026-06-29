@@ -1,5 +1,4 @@
-
-import { Card, Button, Badge } from 'react-bootstrap';
+import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
 
 const CATEGORY_MAP = {
   1: 'Căn hộ dịch vụ',
@@ -9,116 +8,90 @@ const CATEGORY_MAP = {
   5: 'Nhà nguyên căn'
 };
 
-import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
-
-
 const RoomCard = ({ room, onReserve }) => {
-  // Check if room data is provided, otherwise return null or fallback
   if (!room) return null;
 
   return (
-
-    <Card className="h-100 shadow-sm">
-      <Card.Img
-        variant="top"
-        src={`https://picsum.photos/seed/room${room.id}/300/200`}
-        alt="Room image"
-        style={{ height: '240px', objectFit: 'cover' }}
-      />
-      <Card.Body className="d-flex flex-column">
-        <div>
-          <Badge bg="info" className="mb-2">
-            {CATEGORY_MAP[room.categoryId] || 'Phòng cho thuê'}
-          </Badge>
-        </div>
-        <Card.Title className="fw-bold mb-2">
-          {room.title}
-        </Card.Title>
-        <Card.Text className="text-muted mb-4 flex-grow-1">
-          <span className="d-block mb-1">
-            <i className="bi bi-geo-alt-fill text-danger me-1"></i>
-            {room.address}
-          </span>
-          <span className="d-block mb-1">
-            <strong>Diện tích:</strong> {room.area} m²
-          </span>
-          <span className="d-block">
-            <strong>Giá thuê:</strong> <span className="text-primary fw-bold">{room.price.toLocaleString('vi-VN')}đ/tháng</span>
-          </span>
-        </Card.Text>
-        <Button
-          variant="primary"
-          size="sm"
-          className="w-100 mt-auto"
-          onClick={() => onReserve(room)}
-          disabled={!room.isAvailable}
-        >
-          Đặt giữ chỗ
-        </Button>
-
-    <Card className="h-100 shadow hover-lift border-0 overflow-hidden" style={{ borderRadius: '16px', transition: 'transform 0.2s ease-in-out' }}>
-      <div className="position-relative">
-        <Card.Img 
-          variant="top" 
-          src={`https://picsum.photos/seed/room${room.id}/300/200`} 
-          alt="Room image" 
-          style={{ height: '240px', objectFit: 'cover' }}
+    <Card className="h-100 room-card border-0 overflow-hidden">
+      {/* Ảnh phòng */}
+      <div className="position-relative room-card-img-wrapper">
+        <Card.Img
+          variant="top"
+          src={`https://picsum.photos/seed/room${room.id}/300/200`}
+          alt="Room image"
+          className="room-card-img"
         />
+        {/* Badge "Còn trống" góc phải */}
         {room.isAvailable && (
-          <Badge bg="success" className="position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm">
+          <Badge bg="success" className="position-absolute top-0 end-0 m-2 px-2 py-1 rounded-pill shadow-sm">
             Còn trống
           </Badge>
         )}
+        {/* Badge giảm giá góc trái */}
         {room.originalPrice > room.price && (
-          <Badge bg="danger" className="position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill shadow-sm">
+          <Badge bg="danger" className="position-absolute top-0 start-0 m-2 px-2 py-1 rounded-pill shadow-sm">
             -{Math.round(((room.originalPrice - room.price) / room.originalPrice) * 100)}%
           </Badge>
         )}
       </div>
-      
-      <Card.Body className="d-flex flex-column p-4">
-        <Card.Title className="fw-bold mb-2 text-truncate" title={room.title} style={{ fontSize: '1.25rem', lineHeight: '1.4' }}>
+
+      <Card.Body className="d-flex flex-column p-3">
+        {/* Badge danh mục */}
+        <div className="mb-2">
+          <Badge bg="info" className="room-category-badge">
+            {CATEGORY_MAP[room.categoryId] || 'Phòng cho thuê'}
+          </Badge>
+        </div>
+
+        {/* Tiêu đề — clamp 2 dòng */}
+        <Card.Title className="fw-bold mb-1 room-card-title" title={room.title}>
           {room.title}
         </Card.Title>
-        <Card.Text className="text-muted small mb-4">
-          <i className="bi bi-geo-alt-fill text-danger me-1"></i>
-          {room.address}
-        </Card.Text>
-        
-        <Row className="g-3 mb-4 text-center mt-auto">
+
+        {/* Địa chỉ — clamp 2 dòng */}
+        <p className="text-muted small mb-3 room-card-address">
+          📍 {room.address}
+        </p>
+
+        {/* Diện tích + Giá thuê */}
+        <Row className="g-2 mb-3 text-center">
           <Col xs={4}>
             <div className="p-2 bg-light rounded-3 h-100 d-flex flex-column justify-content-center">
-              <div className="text-muted mb-1" style={{ fontSize: '0.8rem' }}>Diện tích</div>
-              <div className="fw-bold">{room.area} m²</div>
+              <div className="room-stat-label">Diện tích</div>
+              <div className="fw-bold room-stat-value">{room.area} m²</div>
             </div>
           </Col>
           <Col xs={8}>
             <div className="p-2 bg-light rounded-3 h-100 d-flex flex-column justify-content-center">
-              <div className="text-muted mb-1" style={{ fontSize: '0.8rem' }}>Giá thuê/Tháng</div>
-              <div className="fw-bold text-primary fs-5">{room.price.toLocaleString('vi-VN')}đ/tháng</div>
+              <div className="room-stat-label">Giá thuê/Tháng</div>
+              {/* text-nowrap ngăn số bị vỡ dòng giữa chừng */}
+              <div className="fw-bold text-primary room-price text-nowrap">
+                {room.price.toLocaleString('vi-VN')}đ/th
+              </div>
             </div>
           </Col>
         </Row>
 
-        <div className="d-flex justify-content-between align-items-center mb-4 px-1">
+        {/* Tiền cọc */}
+        <div className="d-flex justify-content-between align-items-center mb-3 px-1">
           <span className="text-muted small">Tiền đặt cọc:</span>
-          <span className="fw-semibold text-dark">{room.deposit} VNĐ</span>
+          <span className="fw-semibold text-dark small">{room.deposit} VNĐ</span>
         </div>
 
+        {/* Buttons */}
         <div className="d-flex gap-2 mt-auto">
-          <Button variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2">
+          <Button variant="outline-primary" className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm">
             Xem chi tiết
           </Button>
-          <Button 
-            variant="primary" 
-            className="flex-grow-1 rounded-pill fw-medium py-2 shadow-sm"
+          <Button
+            variant="primary"
+            className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm shadow-sm"
             onClick={() => onReserve(room)}
             disabled={!room.isAvailable}
           >
             Đặt giữ chỗ
           </Button>
         </div>
-
       </Card.Body>
     </Card>
   );
