@@ -116,7 +116,7 @@ function App() {
                onReserve={handleAddToBooking}
             />
           } />
-          <Route path="/rooms/:id" element={<RoomDetailPage />} />
+          <Route path="/rooms/:id" element={<RoomDetailPage rooms={ALL_ROOMS} />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/admin/rooms" element={
             <ProtectedRoute>
