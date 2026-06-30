@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import useBooking from './hooks/useBooking';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Banner from './components/Banner';
@@ -68,16 +69,22 @@ function App() {
   // State lựa chọn danh mục phòng
   const [activeCategory, setActiveCategory] = useState(null);
   
-  // State lưu số lượng đặt chỗ
-  const [bookingCount, setBookingCount] = useState(0);
+  // Sử dụng custom hook useBooking
+  const { totalItems, handleAddToBooking } = useBooking();
 
-  // Thêm dòng log này để user test dễ dàng qua Console
-  console.log("Danh mục đang chọn hiện tại (activeCategory):", activeCategory);
+  // useEffect theo dõi sát sao dependency [totalItems] để thay đổi title
+  useEffect(() => {
+    if (totalItems > 0) {
+      document.title = `CozySpace - ${totalItems} phòng đã lưu`;
+    } else {
+      document.title = 'CozySpace - Hệ thống thuê phòng';
+    }
 
-  const handleAddToBooking = (room) => {
-    console.log("Bạn vừa nhấn đặt phòng:", room);
-    setBookingCount(prev => prev + 1);
-  };
+    // Hàm dọn dẹp để khôi phục tiêu đề gốc khi component unmount
+    return () => {
+      document.title = 'CozySpace - Hệ thống thuê phòng';
+    };
+  }, [totalItems]);
 
   // Derived state: lọc phòng theo keyword và category
   const filteredRooms = ALL_ROOMS.filter(room => {
@@ -88,7 +95,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header bookingCount={bookingCount} savedCount={5} />
+      <Header bookingCount={totalItems} savedCount={5} />
       
       <main className="flex-grow-1">
         <Container className="mt-4 mb-5">
