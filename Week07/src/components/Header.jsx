@@ -5,11 +5,13 @@ import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
 import { useCart } from '../context/CartContext';
+import { useTheme } from '../context/ThemeContext';
 
 const Header = ({ savedCount = 0 }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <>
@@ -35,6 +37,16 @@ const Header = ({ savedCount = 0 }) => {
 
             {/* Action buttons bên phải */}
             <div className="d-flex align-items-center gap-2 mt-3 mt-lg-0 flex-wrap">
+              <Button
+                variant={isDark ? "dark" : "light"}
+                onClick={toggleTheme}
+                className="d-flex align-items-center justify-content-center border-0 shadow-sm rounded-circle hover-lift"
+                style={{ width: '40px', height: '40px' }}
+                title={isDark ? "Chuyển sang chế độ Sáng" : "Chuyển sang chế độ Tối"}
+              >
+                {isDark ? '☀️' : '🌙'}
+              </Button>
+
               <Button
                 variant="light"
                 as={Link}
