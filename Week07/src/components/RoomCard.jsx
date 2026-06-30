@@ -1,6 +1,6 @@
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import useBooking from '../hooks/useBooking';
 
 const CATEGORY_MAP = {
   1: 'Căn hộ dịch vụ',
@@ -11,7 +11,7 @@ const CATEGORY_MAP = {
 };
 
 const RoomCard = ({ room }) => {
-  const { addToCart } = useCart();
+  const { handleAddToBooking: addToBooking } = useBooking();
 
   if (!room) return null;
 
@@ -90,7 +90,7 @@ const RoomCard = ({ room }) => {
           <Button
             variant="primary"
             className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm shadow-sm"
-            onClick={() => addToCart(room)}
+            onClick={() => addToBooking(room)}
             disabled={!room.isAvailable}
           >
             Đặt giữ chỗ

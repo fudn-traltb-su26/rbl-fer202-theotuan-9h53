@@ -11,8 +11,7 @@ const RoomListPage = ({
   setKeyword, 
   activeCategory, 
   setActiveCategory, 
-  categories, 
-  onReserve 
+  categories 
 }) => {
   // Trạng thái loading
   const [loading, setLoading] = useState(true);
@@ -74,7 +73,7 @@ const RoomListPage = ({
             )}
             
             {/* Truyền rooms thay vì roomList để search filter hoạt động mượt mà hơn khi props thay đổi */}
-            <RoomGrid rooms={rooms} onReserve={onReserve} />
+            <RoomGrid rooms={rooms} />
           </>
         )}
 

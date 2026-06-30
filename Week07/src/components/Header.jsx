@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
-import { useCart } from '../context/CartContext';
+import useBooking from '../hooks/useBooking';
 import { useTheme } from '../context/ThemeContext';
 
 const Header = ({ savedCount = 0 }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, logout } = useAuth();
-  const { totalItems } = useCart();
+  const { totalItems } = useBooking();
   const { isDark, toggleTheme } = useTheme();
 
   return (

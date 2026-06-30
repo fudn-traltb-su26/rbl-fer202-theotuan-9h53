@@ -12,8 +12,7 @@ const HomePage = ({
   setActiveCategory, 
   keyword, 
   setKeyword, 
-  filteredRooms, 
-  handleAddToBooking 
+  filteredRooms 
 }) => {
   return (
     <Container className="mt-4 mb-5">
@@ -41,7 +40,7 @@ const HomePage = ({
           </p>
         )}
 
-        <RoomGrid rooms={filteredRooms} onReserve={handleAddToBooking} />
+        <RoomGrid rooms={filteredRooms} />
       </SectionWrapper>
 
       {/* Features Section */}
