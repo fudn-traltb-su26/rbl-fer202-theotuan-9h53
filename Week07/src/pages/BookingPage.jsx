@@ -14,7 +14,7 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
   return (
     <Container className="py-5" style={{ minHeight: '60vh' }}>
       <h2 className="mb-4 fw-bold text-primary">Giỏ hàng / Danh sách đặt phòng</h2>
-      
+
       {bookingItems.length === 0 ? (
         <div className="text-center p-5 bg-light rounded shadow-sm border mt-4">
           <h4 className="text-muted fw-normal mb-3">Danh sách đặt phòng của bạn đang trống 📌</h4>
@@ -41,10 +41,10 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
               {bookingItems.map((item) => (
                 <tr key={item.id}>
                   <td className="text-center" style={{ width: '120px' }}>
-                    <Image 
-                      src={`https://picsum.photos/seed/room${item.id}/300/200`} 
-                      alt={item.title} 
-                      thumbnail 
+                    <Image
+                      src={`https://picsum.photos/seed/room${item.id}/300/200`}
+                      alt={item.title}
+                      thumbnail
                       style={{ width: '100px', height: '70px', objectFit: 'cover' }}
                     />
                   </td>
@@ -57,8 +57,8 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
                   <td className="text-end text-danger fw-bold">{formatPrice(item.price)}</td>
                   <td>
                     <div className="d-flex justify-content-center align-items-center gap-2">
-                      <Button 
-                        variant="outline-secondary" 
+                      <Button
+                        variant="outline-secondary"
                         size="sm"
                         className="rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: '28px', height: '28px', padding: 0 }}
@@ -68,8 +68,8 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
                         -
                       </Button>
                       <span className="fw-bold px-2">{item.quantity}</span>
-                      <Button 
-                        variant="outline-secondary" 
+                      <Button
+                        variant="outline-secondary"
                         size="sm"
                         className="rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: '28px', height: '28px', padding: 0 }}
@@ -83,9 +83,9 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
                     {formatPrice(item.price * item.quantity)}
                   </td>
                   <td className="text-center">
-                    <Button 
-                      variant="danger" 
-                      size="sm" 
+                    <Button
+                      variant="danger"
+                      size="sm"
                       onClick={() => onRemove(item.id)}
                     >
                       Xóa
@@ -95,7 +95,7 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
               ))}
             </tbody>
           </Table>
-          
+
           <div className="d-flex justify-content-end mt-4 pt-3 border-top">
             <div className="p-4 bg-light rounded border" style={{ minWidth: '350px' }}>
               <div className="d-flex justify-content-between mb-2">
