@@ -518,11 +518,11 @@ Quản lý side effects với `useEffect`. Chia sẻ state toàn app không cầ
 ### ✅ Checklist công việc
 
 **CartContext.jsx [A]**
-- [ ] `const CartContext = createContext(null)`
-- [ ] `CartProvider` component: state `cartItems`, các hàm `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`
-- [ ] `totalItems` và `totalPrice` tính từ state (derived values)
-- [ ] Export custom hook: `export const useCart = () => useContext(CartContext)`
-- [ ] Bọc App trong `<CartProvider>` tại `main.jsx`
+- [x] `const CartContext = createContext(null)`
+- [x] `CartProvider` component: state `cartItems`, các hàm `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`
+- [x] `totalItems` và `totalPrice` tính từ state (derived values)
+- [x] Export custom hook: `export const useCart = () => useContext(CartContext)`
+- [x] Bọc App trong `<CartProvider>` tại `main.jsx`
 - [ ] Tham khảo: `SourceCode/Week07-Hooks/src/context/CartContext.jsx`
 
 **ThemeContext.jsx [B]**
