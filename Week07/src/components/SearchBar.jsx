@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = forwardRef(({ onSearch }, ref) => {
   const [keyword, setKeyword] = useState('');
   const [error, setError] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -41,6 +41,7 @@ const SearchBar = ({ onSearch }) => {
 
           {/* Input */}
           <Form.Control
+            ref={ref}
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
@@ -80,6 +81,6 @@ const SearchBar = ({ onSearch }) => {
       </Form>
     </div>
   );
-};
+});
 
 export default SearchBar;
