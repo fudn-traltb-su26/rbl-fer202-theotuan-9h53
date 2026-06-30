@@ -72,7 +72,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState(null);
   
   // Sử dụng Custom Hook useBooking để lấy ra giá trị biến động totalItems
-  const { bookingItems, totalItems, handleAddToBooking, onUpdateMonths, onRemove } = useBooking();
+  const { bookingItems, totalItems, onUpdateMonths, onRemove } = useBooking();
 
   // useEffect theo dõi sát sao dependency [totalItems]
   useEffect(() => {
@@ -100,7 +100,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header bookingCount={totalItems} savedCount={5} />
+      <Header savedCount={5} />
       
       <main className="flex-grow-1">
         <Routes>
@@ -112,7 +112,6 @@ function App() {
               keyword={keyword}
               setKeyword={setKeyword}
               filteredRooms={filteredRooms}
-              handleAddToBooking={handleAddToBooking}
             />
           } />
           <Route path="/rooms" element={
@@ -123,7 +122,6 @@ function App() {
                activeCategory={activeCategory}
                setActiveCategory={setActiveCategory}
                categories={CATEGORIES}
-               onReserve={handleAddToBooking}
             />
           } />
           <Route path="/rooms/:id" element={<RoomDetailPage rooms={ALL_ROOMS} />} />

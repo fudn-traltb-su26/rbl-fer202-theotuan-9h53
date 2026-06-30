@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 import RoomCard from './RoomCard';
 
-const RoomGrid = ({ rooms = [], onReserve }) => {
+const RoomGrid = ({ rooms = [] }) => {
   if (!rooms || rooms.length === 0) {
     return (
       <div className="text-center my-5 p-5 bg-light rounded-3">
