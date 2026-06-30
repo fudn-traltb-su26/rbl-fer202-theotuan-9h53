@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import useBooking from './hooks/useBooking';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -70,43 +71,25 @@ function App() {
   // State lựa chọn danh mục phòng
   const [activeCategory, setActiveCategory] = useState(null);
   
-  // State lưu số lượng đặt chỗ
-  const [bookingItems, setBookingItems] = useState([
-    {
-      id: 1,
-      categoryId: 1,
-      title: "Phòng trọ sinh viên cao cấp, Full nội thất gần ĐH FPT",
-      address: "Khu công nghệ cao Hòa Lạc, Thạch Thất, Hà Nội",
-      price: 3500000,
-      quantity: 1
+  // Sử dụng Custom Hook useBooking để lấy ra giá trị biến động totalItems
+  const { bookingItems, totalItems, handleAddToBooking, onUpdateMonths, onRemove } = useBooking();
+
+  // useEffect theo dõi sát sao dependency [totalItems]
+  useEffect(() => {
+    if (totalItems > 0) {
+      document.title = `CozySpace - ${totalItems} phòng đã lưu`;
+    } else {
+      document.title = 'CozySpace - Hệ thống thuê phòng';
     }
-  ]);
-  
-  const bookingCount = bookingItems.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Hàm dọn dẹp để khôi phục tiêu đề gốc khi component unmount
+    return () => {
+      document.title = 'CozySpace - Hệ thống thuê phòng';
+    };
+  }, [totalItems]);
 
   // Thêm dòng log này để user test dễ dàng qua Console
   console.log("Danh mục đang chọn hiện tại (activeCategory):", activeCategory);
-
-  const handleAddToBooking = (room) => {
-    console.log("Bạn vừa nhấn đặt phòng:", room);
-    if (room) {
-      setBookingItems(prev => {
-        const exists = prev.find(item => item.id === room.id);
-        if (exists) {
-          return prev.map(item => item.id === room.id ? { ...item, quantity: item.quantity + 1 } : item);
-        }
-        return [...prev, { ...room, quantity: 1 }];
-      });
-    }
-  };
-
-  const onUpdateMonths = (id, newQuantity) => {
-    setBookingItems(prev => prev.map(item => item.id === id ? { ...item, quantity: newQuantity } : item));
-  };
-
-  const onRemove = (id) => {
-    setBookingItems(prev => prev.filter(item => item.id !== id));
-  };
 
   // Derived state: lọc phòng theo keyword và category
   const filteredRooms = ALL_ROOMS.filter(room => {
@@ -117,7 +100,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header savedCount={5} />
+      <Header bookingCount={totalItems} savedCount={5} />
       
       <main className="flex-grow-1">
         <Routes>
