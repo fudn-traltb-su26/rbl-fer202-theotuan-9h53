@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form, Spinner, Alert, Badge, Image } from 'react-bootstrap';
 import { getRooms, createRoom, updateRoom, deleteRoom } from '../../services/roomService';
@@ -302,6 +303,14 @@ const RoomManagePage = () => {
       </Modal>
 
     </Container>
+
+const RoomManagePage = () => {
+  return (
+    <div className="container mt-5">
+      <h2>Quản lý phòng</h2>
+      <p>Trang dành cho admin để thêm, sửa, xóa phòng.</p>
+    </div>
+
   );
 };
 

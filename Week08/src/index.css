@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --secondary: #ec4899;
+  --bg-light: #f9fafb;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --footer-bg: #111827;
+  --footer-border: #374151;
+  --search-border: #e5e7eb;
+  --search-border-focus: #4F46E5;
+  --search-shadow-focus: 0 0 0 3px rgba(79, 70, 229, 0.2), 0 4px 20px rgba(0,0,0,0.1);
+  --search-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* ===== UTILITIES ===== */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+.hover-lift {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary-custom {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--primary-hover);
+  color: white;
+}
+
+/* ===== HEADER / NAVBAR ===== */
+.navbar-brand-icon {
+  font-size: 1.8rem;
+}
+
+.nav-link-custom {
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link-custom:hover {
+  background-color: rgba(79, 70, 229, 0.07);
+  color: var(--primary) !important;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+}
+
+.dropdown-menu-custom {
+  border-radius: 12px;
+}
+
+/* Nút đăng nhập: dùng màu primary từ biến */
+.btn-login {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.btn-login:hover {
+  background-color: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-input-group {
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: var(--search-shadow);
+  border: 2px solid var(--search-border);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input-group.is-focused {
+  box-shadow: var(--search-shadow-focus);
+  border-color: var(--search-border-focus);
+}
+
+.search-icon-text {
+  background: #fff;
+  border: none;
+  padding-left: 18px;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.search-icon-text.focused {
+  color: var(--primary);
+}
+
+.search-form-control {
+  background: #fff !important;
+  color: #111827;
+  font-size: 0.95rem;
+  padding: 14px 8px;
+}
+
+.search-form-control:focus {
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.search-clear-btn {
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 1rem;
+  padding-right: 4px;
+  transition: color 0.2s ease;
+}
+
+.search-clear-btn:hover {
+  color: #ef4444;
+}
+
+.search-submit-btn {
+  background: linear-gradient(135deg, var(--primary), #7C3AED);
+  border: none;
+  border-radius: 0 50px 50px 0 !important;
+  padding: 0 28px;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s ease;
+}
+
+.search-submit-btn:hover {
+  opacity: 0.9;
+  background: linear-gradient(135deg, var(--primary), #7C3AED);
+}
+
+.search-error {
+  color: #ef4444;
+  font-size: 0.83rem;
+  padding-left: 12px;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ===== FOOTER ===== */
+.footer-dark {
+  background-color: var(--footer-bg);
+  color: #e5e7eb;
+}
+
+.footer-divider {
+  border-color: var(--footer-border);
+}
+
+.footer-social-link {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-social-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== ROOM CARD ===== */
+.room-card {
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+}
+
+.room-card-img-wrapper {
+  overflow: hidden;
+}
+
+.room-card-img {
+  height: 160px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.room-card:hover .room-card-img {
+  transform: scale(1.04);
+}
+
+.room-category-badge {
+  font-size: 0.72rem;
+}
+
+/* Tiêu đề: hiển thị tối đa 2 dòng, cắt với ... */
+.room-card-title {
+  font-size: 0.92rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6rem;
+}
+
+/* Địa chỉ: hiển thị tối đa 2 dòng */
+.room-card-address {
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4rem;
+}
+
+.room-stat-label {
+  font-size: 0.72rem;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+.room-stat-value {
+  font-size: 0.88rem;
+}
+
+/* Giá: không vỡ dòng, font vừa phải */
+.room-price {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Mobile: 375px – layout 2 cột phòng, stack nav items */
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.4rem !important;
+  }
+  .navbar-brand-icon {
+    font-size: 1.4rem;
+  }
+  .search-submit-btn {
+    padding: 0 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet: 768px – layout 3 cột phòng, navbar vẫn collapse */
+@media (min-width: 576px) and (max-width: 992px) {
+  .navbar-brand {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* Desktop: 1280px+ – layout 5 cột phòng, navbar full hiển thị */
+@media (min-width: 1280px) {
+  .search-input-group {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
