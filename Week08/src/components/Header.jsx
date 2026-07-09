@@ -31,6 +31,7 @@ const Header = ({ savedCount = 0 }) => {
             <Nav className="mx-auto fw-medium fs-6 gap-2">
               <Nav.Link as={NavLink} to="/" end className="px-3 text-dark nav-link-custom">Trang chủ</Nav.Link>
               <Nav.Link as={NavLink} to="/rooms" className="px-3 text-dark nav-link-custom">Phòng thuê</Nav.Link>
+              <Nav.Link as={NavLink} to="/admin/rooms" className="px-3 text-dark nav-link-custom">Quản lý (Admin)</Nav.Link>
               <Nav.Link as={NavLink} to="/categories" className="px-3 text-dark nav-link-custom">Danh mục</Nav.Link>
               <Nav.Link as={NavLink} to="/contact" className="px-3 text-dark nav-link-custom">Liên hệ</Nav.Link>
             </Nav>
