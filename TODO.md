@@ -601,17 +601,17 @@ Kết nối app với REST API thực (json-server). Biết gọi HTTP đầy đ
 ### ✅ Checklist công việc
 
 **json-server [A]**
-- [ ] Đảm bảo `db.json` ở root project có đủ dữ liệu
-- [ ] Thêm script vào `package.json`: `"server": "json-server --watch db.json --port 3001"`
-- [ ] Chạy 2 terminal: `npm run dev` (port 5173) và `npm run server` (port 3001)
-- [ ] Kiểm tra: `curl http://localhost:3001/books` trả về JSON
+- [x] Đảm bảo `db.json` ở root project có đủ dữ liệu
+- [x] Thêm script vào `package.json`: `"server": "json-server --watch db.json --port 3001"`
+- [x] Chạy 2 terminal: `npm run dev` (port 5173) và `npm run server` (port 3001)
+- [x] Kiểm tra: `curl http://localhost:3001/rooms` trả về JSON
 
-**bookService.js [A]**
-- [ ] Tạo `src/services/bookService.js`
-- [ ] `const api = axios.create({ baseURL: 'http://localhost:3001', timeout: 5000 })`
-- [ ] Export: `getBooks(params)`, `getBookById(id)`, `createBook(data)`, `updateBook(id, data)`, `deleteBook(id)`
-- [ ] Thêm interceptor log lỗi
-- [ ] Tham khảo: `SourceCode/Week08-Axios/src/services/bookService.js`
+**roomService.js [A]**
+- [x] Tạo `src/services/roomService.js`
+- [x] `const api = axios.create({ baseURL: 'http://localhost:3001', timeout: 5000 })`
+- [x] Export: `getRooms(params)`, `getRoomById(id)`, `createRoom(data)`, `updateRoom(id, data)`, `deleteRoom(id)`
+- [x] Thêm interceptor log lỗi
+- [x] Tham khảo: `SourceCode/Week08-Axios/src/services/roomService.js` làm cái ni nè
 
 **BookListPage fetch [B]**
 - [ ] Thay `setBooks(ALL_BOOKS)` bằng `const data = await getBooks()` bên trong `useEffect`
