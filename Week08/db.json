@@ -33,22 +33,6 @@
   ],
   "rooms": [
     {
-      "id": "1",
-      "title": "Phòng Studio Ban Công Thoáng Mát Full Nội Thất Quận 9",
-      "address": "12/4 Đường D2, Phường Tăng Nhơn Phú A, Quận 9, TP. Thủ Đức",
-      "price": 3800000,
-      "deposit": 4000000,
-      "category": "Studio",
-      "categoryId": 1,
-      "cover": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
-      "area": 25,
-      "rating": 4.8,
-      "reviewCount": 15,
-      "available": true,
-      "featured": true,
-      "description": "Phòng Studio thiết kế hiện đại, có ban công rộng rãi đón ánh sáng tự nhiên. Trang bị sẵn giường tủ, nệm, điều hòa Inverter tiết kiệm điện, tủ lạnh, bếp từ, máy hút mùi. Hệ thống khóa vân tay an ninh tuyệt đối, camera giám sát 24/7. Thích hợp cho sinh viên FPT hoặc người đi làm."
-    },
-    {
       "id": "2",
       "title": "Căn Hộ Studio Cao Cấp Gần ĐH FPT - Vinhomes Grand Park",
       "address": "Phân khu Rainbow, Vinhomes Grand Park, Phường Long Thạnh Mỹ, Quận 9",
