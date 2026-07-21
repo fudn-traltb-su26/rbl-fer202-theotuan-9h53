@@ -1,17 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectTotalItems } from './store/cartSlice';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import RoomListPage from './pages/RoomListPage';
-import RoomDetailPage from './pages/RoomDetailPage';
-import BookingPage from './pages/BookingPage';
-import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import RoomManagePage from './pages/admin/RoomManagePage';
 import './App.css';
+
+// ⚡ [PERF] React.lazy — Route-based Code Splitting
+// Mỗi page được tách thành chunk riêng, chỉ tải khi user navigate đến route đó
+const HomePage = lazy(() => import('./pages/HomePage'));
+const RoomListPage = lazy(() => import('./pages/RoomListPage'));
+const RoomDetailPage = lazy(() => import('./pages/RoomDetailPage'));
+const BookingPage = lazy(() => import('./pages/BookingPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const RoomManagePage = lazy(() => import('./pages/admin/RoomManagePage'));
+
+// ⚡ [PERF] Loading Spinner Fallback — hiển thị khi chunk đang được tải
+const LoadingFallback = () => (
+  <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '60vh' }}>
+    <div className="text-center">
+      <div className="spinner-border text-primary mb-3" role="status" style={{ width: '3rem', height: '3rem' }}>
+        <span className="visually-hidden">Đang tải...</span>
+      </div>
+      <p className="text-muted fw-medium">Đang tải trang...</p>
+    </div>
+  </div>
+);
 
 const CATEGORIES = [
   { id: 1, name: 'Căn hộ dịch vụ', icon: '🏢' },
@@ -104,36 +119,39 @@ function App() {
       <Header savedCount={5} />
       
       <main className="flex-grow-1">
-        <Routes>
-          <Route path="/" element={
-            <HomePage 
-              categories={CATEGORIES}
-              activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
-              keyword={keyword}
-              setKeyword={setKeyword}
-              filteredRooms={filteredRooms}
-            />
-          } />
-          <Route path="/rooms" element={
-            <RoomListPage 
-               rooms={filteredRooms}
-               keyword={keyword}
-               setKeyword={setKeyword}
-               activeCategory={activeCategory}
-               setActiveCategory={setActiveCategory}
-               categories={CATEGORIES}
-            />
-          } />
-          <Route path="/rooms/:id" element={<RoomDetailPage rooms={ALL_ROOMS} />} />
-          <Route path="/booking" element={<BookingPage />} />
-          <Route path="/admin/rooms" element={
-            <ProtectedRoute>
-              <RoomManagePage />
-            </ProtectedRoute>
-          } />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        {/* ⚡ [PERF] Suspense bọc Routes — hiển thị LoadingFallback khi chunk chưa tải xong */}
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={
+              <HomePage 
+                categories={CATEGORIES}
+                activeCategory={activeCategory}
+                setActiveCategory={setActiveCategory}
+                keyword={keyword}
+                setKeyword={setKeyword}
+                filteredRooms={filteredRooms}
+              />
+            } />
+            <Route path="/rooms" element={
+              <RoomListPage 
+                 rooms={filteredRooms}
+                 keyword={keyword}
+                 setKeyword={setKeyword}
+                 activeCategory={activeCategory}
+                 setActiveCategory={setActiveCategory}
+                 categories={CATEGORIES}
+              />
+            } />
+            <Route path="/rooms/:id" element={<RoomDetailPage rooms={ALL_ROOMS} />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/admin/rooms" element={
+              <ProtectedRoute>
+                <RoomManagePage />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </main>
 
       <Footer />
