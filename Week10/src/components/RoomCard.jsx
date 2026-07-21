@@ -40,6 +40,8 @@ const RoomCard = ({ room }) => {
           src={`https://picsum.photos/seed/room${room.id}/300/200`}
           alt="Room image"
           className="room-card-img"
+          loading="lazy"
+          decoding="async"
         />
         {/* Badge "Còn trống" góc phải */}
         {room.isAvailable && (

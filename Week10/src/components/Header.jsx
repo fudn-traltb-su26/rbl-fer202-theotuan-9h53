@@ -7,12 +7,15 @@ import AuthModal from './AuthModal';
 import { useSelector } from 'react-redux';
 import { selectTotalItems } from '../store/cartSlice';
 import { useTheme } from '../context/ThemeContext';
+import usePrefetchOnHover from '../hooks/usePrefetchOnHover';
 
 const Header = ({ savedCount = 0 }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, logout } = useAuth();
   const totalItems = useSelector(selectTotalItems);
   const { isDark, toggleTheme } = useTheme();
+  // ⚡ [PERF] Prefetch on hover — tải trước chunk khi user di chuột lên link
+  const { handlers: prefetchHandlers } = usePrefetchOnHover();
 
   return (
     <>
@@ -30,9 +33,9 @@ const Header = ({ savedCount = 0 }) => {
           <Navbar.Collapse id="main-navbar-nav">
             {/* Nav links ở giữa */}
             <Nav className="mx-auto fw-medium fs-6 gap-2">
-              <Nav.Link as={NavLink} to="/" end className="px-3 text-dark nav-link-custom">Trang chủ</Nav.Link>
-              <Nav.Link as={NavLink} to="/rooms" className="px-3 text-dark nav-link-custom">Phòng thuê</Nav.Link>
-              <Nav.Link as={NavLink} to="/admin/rooms" className="px-3 text-dark nav-link-custom">Quản lý (Admin)</Nav.Link>
+              <Nav.Link as={NavLink} to="/" end className="px-3 text-dark nav-link-custom" onMouseEnter={prefetchHandlers['/']}>Trang chủ</Nav.Link>
+              <Nav.Link as={NavLink} to="/rooms" className="px-3 text-dark nav-link-custom" onMouseEnter={prefetchHandlers['/rooms']}>Phòng thuê</Nav.Link>
+              <Nav.Link as={NavLink} to="/admin/rooms" className="px-3 text-dark nav-link-custom" onMouseEnter={prefetchHandlers['/admin/rooms']}>Quản lý (Admin)</Nav.Link>
               <Nav.Link as={NavLink} to="/categories" className="px-3 text-dark nav-link-custom">Danh mục</Nav.Link>
               <Nav.Link as={NavLink} to="/contact" className="px-3 text-dark nav-link-custom">Liên hệ</Nav.Link>
             </Nav>
