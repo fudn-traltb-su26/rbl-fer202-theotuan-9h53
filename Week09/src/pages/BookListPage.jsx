@@ -7,44 +7,42 @@ import SectionWrapper from '../components/SectionWrapper';
 import useFetch from '../hooks/useFetch';
 import useDebounce from '../hooks/useDebounce';
 
-const RoomListPage = ({ 
+const BookListPage = ({ 
   keyword, 
   setKeyword, 
   activeCategory, 
   setActiveCategory, 
   categories 
 }) => {
-  // Tích hợp Debounce: Khai báo debouncedKeyword = useDebounce(keyword, 400)
+  // Tích hợp Debounce cho từ khóa tìm kiếm (400ms)
   const debouncedKeyword = useDebounce(keyword, 400);
 
-  // Tái cấu trúc mã nguồn: Thay thế useEffect + axios thủ công bằng custom hook useFetch
-  const { data: rawRooms, loading, error, refetch } = useFetch(
+  // Tái cấu trúc mã nguồn: Gọi useFetch thay vì useEffect + axios thủ công
+  const { data: books, loading, error, refetch } = useFetch(
     'http://localhost:3001/rooms',
     debouncedKeyword ? { q: debouncedKeyword } : {}
   );
 
-  const roomList = rawRooms || [];
+  const bookList = books || [];
 
   // Ref cho ô tìm kiếm
   const searchInputRef = useRef(null);
 
-  // Tự động focus ô tìm kiếm khi dữ liệu đã tải xong và không lỗi
+  // Auto-focus input sau khi data tải xong
   useEffect(() => {
-    if (loading === false && !error) {
+    if (!loading && !error) {
       searchInputRef.current?.focus();
     }
   }, [loading, error]);
 
-  // Derived state: lọc phòng theo category (nếu API `q` tìm kiếm chung theo keyword)
-  const filteredRooms = roomList.filter(room => {
-    const matchCat = activeCategory === null || room.categoryId === activeCategory;
+  const filteredBooks = bookList.filter(book => {
+    const matchCat = activeCategory === null || book.categoryId === activeCategory;
     return matchCat;
   });
 
   return (
     <Container className="mt-5 mb-5">
       <SectionWrapper title="Danh sách phòng cho thuê">
-        
         <CategoryList 
           categories={categories} 
           activeCategory={activeCategory}
@@ -60,7 +58,7 @@ const RoomListPage = ({
             <Spinner animation="border" variant="primary" role="status">
               <span className="visually-hidden">Đang tải...</span>
             </Spinner>
-            <p className="mt-3 text-muted">Đang tải dữ liệu phòng...</p>
+            <p className="mt-3 text-muted">Đang tải dữ liệu...</p>
           </div>
         ) : error ? (
           <div className="my-5">
@@ -77,17 +75,16 @@ const RoomListPage = ({
           <>
             {keyword && (
               <p className="text-muted mb-3" style={{ fontSize: '0.9rem' }}>
-                🔍 Kết quả tìm kiếm cho: <strong>"{keyword}"</strong> — {filteredRooms.length} phòng tìm thấy
+                🔍 Kết quả tìm kiếm cho: <strong>"{keyword}"</strong> — {filteredBooks.length} kết quả tìm thấy
               </p>
             )}
             
-            <RoomGrid rooms={filteredRooms} />
+            <RoomGrid rooms={filteredBooks} />
           </>
         )}
-
       </SectionWrapper>
     </Container>
   );
 };
 
-export default RoomListPage;
+export default BookListPage;
