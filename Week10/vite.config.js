@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 // ⚡ [PERF] Conditional import: chỉ load visualizer khi build
 // Plugin này tạo file stats.html để phân tích kích thước bundle
@@ -7,7 +8,10 @@ const isAnalyze = process.env.ANALYZE === 'true';
 
 // https://vite.dev/config/
 export default defineConfig(async () => {
-  const plugins = [react()];
+  const plugins = [
+    tailwindcss(),
+    react()
+  ];
 
   // ⚡ [PERF] rollup-plugin-visualizer — Bundle Analysis
   // Chạy: ANALYZE=true npm run build (hoặc npm run build:analyze)
