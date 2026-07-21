@@ -1,8 +1,13 @@
 import React from 'react';
 import { Table, Button, Image, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateQuantity, removeFromCart } from '../store/cartSlice';
 
-const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
+const BookingPage = () => {
+  const dispatch = useDispatch();
+  const bookingItems = useSelector(state => state.cart.items);
+
   // Hàm định dạng tiền tệ
   const formatPrice = (price) => {
     return new Intl.NumberFormat('vi-VN').format(price) + ' đ';
@@ -62,7 +67,7 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
                         size="sm"
                         className="rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: '28px', height: '28px', padding: 0 }}
-                        onClick={() => onUpdateMonths(item.id, item.quantity - 1)}
+                        onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))}
                         disabled={item.quantity <= 1}
                       >
                         -
@@ -73,7 +78,7 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
                         size="sm"
                         className="rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: '28px', height: '28px', padding: 0 }}
-                        onClick={() => onUpdateMonths(item.id, item.quantity + 1)}
+                        onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}
                       >
                         +
                       </Button>
@@ -86,7 +91,7 @@ const BookingPage = ({ bookingItems = [], onUpdateMonths, onRemove }) => {
                     <Button
                       variant="danger"
                       size="sm"
-                      onClick={() => onRemove(item.id)}
+                      onClick={() => dispatch(removeFromCart(item.id))}
                     >
                       Xóa
                     </Button>

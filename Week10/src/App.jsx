@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import useBooking from './hooks/useBooking';
+import { useSelector } from 'react-redux';
+import { selectTotalItems } from './store/cartSlice';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -71,8 +72,8 @@ function App() {
   // State lựa chọn danh mục phòng
   const [activeCategory, setActiveCategory] = useState(null);
   
-  // Sử dụng Custom Hook useBooking để lấy ra giá trị biến động totalItems
-  const { bookingItems, totalItems, onUpdateMonths, onRemove } = useBooking();
+  // Lấy ra giá trị biến động totalItems từ Redux
+  const totalItems = useSelector(selectTotalItems);
 
   // useEffect theo dõi sát sao dependency [totalItems]
   useEffect(() => {
@@ -125,7 +126,7 @@ function App() {
             />
           } />
           <Route path="/rooms/:id" element={<RoomDetailPage rooms={ALL_ROOMS} />} />
-          <Route path="/booking" element={<BookingPage bookingItems={bookingItems} onUpdateMonths={onUpdateMonths} onRemove={onRemove} />} />
+          <Route path="/booking" element={<BookingPage />} />
           <Route path="/admin/rooms" element={
             <ProtectedRoute>
               <RoomManagePage />
