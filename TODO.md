@@ -672,11 +672,11 @@ Tái sử dụng stateful logic bằng Custom Hook. Biết tách concerns: UI co
 ### ✅ Checklist công việc
 
 **useFetch [A]**
-- [ ] Input: `url` (string), `params` (object, default `{}`)
-- [ ] Output: `{ data, loading, error, refetch }`
-- [ ] Dùng `useCallback` để tránh infinite loop khi params thay đổi
-- [ ] Serialize params: `JSON.stringify(params)` trong dependency array
-- [ ] Tham khảo: `SourceCode/Week09-CustomHooks/src/hooks/useFetch.js`
+- [x] Input: `url` (string), `params` (object, default `{}`)
+- [x] Output: `{ data, loading, error, refetch }`
+- [x] Dùng `useCallback` để tránh infinite loop khi params thay đổi
+- [x] Serialize params: `JSON.stringify(params)` trong dependency array
+- [x] Tham khảo: `SourceCode/Week09-CustomHooks/src/hooks/useFetch.js`
 
 **useDebounce [B]**
 - [ ] Input: `value`, `delay` (default 500ms)
