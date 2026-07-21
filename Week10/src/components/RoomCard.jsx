@@ -1,6 +1,7 @@
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import useBooking from '../hooks/useBooking';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/cartSlice';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const CATEGORY_MAP = {
@@ -12,7 +13,7 @@ const CATEGORY_MAP = {
 };
 
 const RoomCard = ({ room }) => {
-  const { handleAddToBooking: addToBooking } = useBooking();
+  const dispatch = useDispatch();
   const [wishlist, setWishlist] = useLocalStorage('readmore_wishlist', []);
   
   // Safe check because room is checked below, but we need it for hooks rules (called at top)
@@ -115,7 +116,7 @@ const RoomCard = ({ room }) => {
           <Button
             variant="primary"
             className="flex-grow-1 rounded-pill fw-medium py-2 btn-sm shadow-sm"
-            onClick={() => addToBooking(room)}
+            onClick={() => dispatch(addToCart(room))}
             disabled={!room.isAvailable}
           >
             Đặt giữ chỗ

@@ -4,13 +4,14 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
-import useBooking from '../hooks/useBooking';
+import { useSelector } from 'react-redux';
+import { selectTotalItems } from '../store/cartSlice';
 import { useTheme } from '../context/ThemeContext';
 
 const Header = ({ savedCount = 0 }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, logout } = useAuth();
-  const { totalItems } = useBooking();
+  const totalItems = useSelector(selectTotalItems);
   const { isDark, toggleTheme } = useTheme();
 
   return (
