@@ -1,6 +1,7 @@
 import { Card, Button, Row, Col, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import useBooking from '../hooks/useBooking';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const CATEGORY_MAP = {
   1: 'Căn hộ dịch vụ',
@@ -12,6 +13,20 @@ const CATEGORY_MAP = {
 
 const RoomCard = ({ room }) => {
   const { handleAddToBooking: addToBooking } = useBooking();
+  const [wishlist, setWishlist] = useLocalStorage('readmore_wishlist', []);
+  
+  // Safe check because room is checked below, but we need it for hooks rules (called at top)
+  const isWishlisted = room ? wishlist.some(item => item.id === room.id) : false;
+
+  const toggleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isWishlisted) {
+      setWishlist(wishlist.filter(item => item.id !== room.id));
+    } else {
+      setWishlist([...wishlist, room]);
+    }
+  };
 
   if (!room) return null;
 
@@ -48,9 +63,19 @@ const RoomCard = ({ room }) => {
         </div>
 
         {/* Tiêu đề — clamp 2 dòng */}
-        <Card.Title className="fw-bold mb-1 room-card-title" title={room.title}>
-          {room.title}
-        </Card.Title>
+        <div className="d-flex justify-content-between align-items-start mb-1">
+          <Card.Title className="fw-bold mb-0 room-card-title" title={room.title}>
+            {room.title}
+          </Card.Title>
+          <button
+            onClick={toggleWishlist}
+            className="border-0 bg-transparent p-0 ms-2"
+            style={{ fontSize: '1.25rem', lineHeight: 1 }}
+            title={isWishlisted ? 'Xóa khỏi yêu thích' : 'Thêm vào yêu thích'}
+          >
+            {isWishlisted ? '❤️' : '🤍'}
+          </button>
+        </div>
 
         {/* Địa chỉ — clamp 2 dòng */}
         <p className="text-muted small mb-3 room-card-address">
